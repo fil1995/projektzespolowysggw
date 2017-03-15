@@ -8,7 +8,9 @@ $haslo=$_POST['haslo'];
 
 if (!empty($nick) && !empty($haslo))
 {
-	$sql = 'SELECT stan_konta from uzytkownicy WHERE nick = "' . $nick . '"';
+	$sql = 'SELECT stan_konta from uzytkownicy WHERE 
+		nick = "' . $nick . '" AND 
+		haslo = "' . $haslo . '"';
 
 	$result = $conn->query($sql);
 
@@ -17,11 +19,11 @@ if (!empty($nick) && !empty($haslo))
 		echo $result->fetch_assoc()['stan_konta'];
 		
 	} else {
-		echo "0 results";
+		echo "error";
 	}
 	$conn->close();
 }else{
-	echo "Puste";
+	echo "error";
 }
 
 

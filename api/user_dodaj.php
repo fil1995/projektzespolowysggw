@@ -15,12 +15,12 @@ if (!empty($nick) && !empty($email) && !empty($haslo))
 	if (mysqli_query($conn, $sql)) {
 		echo "OK";
 	} else {
-		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		echo "error";
 	}
 
 	mysqli_close($conn);
 }else{
-	echo "Puste";
+	echo "error";
 }
 
 
