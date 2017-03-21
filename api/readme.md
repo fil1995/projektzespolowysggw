@@ -12,3 +12,7 @@ haslo
 zmiana
 
 
+Api wystawione online na serwerze - linki na trello
+
+
+Do poprawy: zabezpieczenie przed sql injection oraz jakieœ logowanie, token...
