@@ -1,0 +1,3 @@
+[submodule "kasynobackend"]
+	path = kasynobackend
+	url = https://github.com/wygoda/kasynobackend.git
