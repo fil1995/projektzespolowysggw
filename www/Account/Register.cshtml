@@ -1,0 +1,80 @@
+﻿@* Usuń tę sekcję, jeśli korzystasz z obsługi pakietów *@
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Zarejestruj się";
+
+    // Inicjowanie ogólnych zmiennych strony
+    var nick = "";
+    var email = "";
+    var haslo = "";
+    var confirmPassword = "";
+
+    // Konfiguracja weryfikacji
+    Validation.RequireField("email", "Musisz podać adres e-mail.");
+    Validation.RequireField("haslo", "Hasło nie może być puste.");
+    Validation.Add("confirmPassword",
+        Validator.EqualsTo("haslo", "Hasło i potwierdzenie hasła są niezgodne."));
+    Validation.Add("haslo",
+        Validator.StringLength(
+            maxLength: Int32.MaxValue,
+            minLength: 6,
+            errorMessage: "Hasło musi mieć co najmniej 6 znaków"));
+
+    // W przypadku żądania POST weryfikacja i przetwarzanie danych
+    if (IsPost) {
+        AntiForgery.Validate();
+        nick = Request.Form["nick"];
+        email = Request.Form["email"];
+        haslo = Request.Form["haslo"];
+        confirmPassword = Request.Form["confirmPassword"];
+
+
+    }
+}
+<hgroup class="title">
+    <h1>@Page.Title.</h1>
+    <h2>Utwórz nowe konto.</h2>
+</hgroup>
+
+<form action="https://freeshell.de/~fil1995/api/user_dodaj.php" method="post">
+    @AntiForgery.GetHtml()
+    @* Jeśli istnieje co najmniej jeden błąd weryfikacji, powiadomienie użytkownika *@
+    @Html.ValidationSummary("Próba utworzenia konta nie powiodła się. Popraw błędy i ponów próbę.", excludeFieldErrors: true, htmlAttributes: null)
+
+    <fieldset>
+        <legend>Formularz rejestracji</legend>
+        <ol>
+            <li class="nick">
+                <label>Nick</label>
+                <input type="text" id="nick" name="nick" value="@nick" @Validation.For("nick") />
+                @* Wypisanie wszelkich błędów weryfikacji nicku na stronie *@
+                @Html.ValidationMessage("nick")
+            </li>
+            <li class="email">
+                <label for="email" @if(!ModelState.IsValidField("email")){<text>class="error-label"</text>}>Adres e-mail</label>
+                <input type="text" id="email" name="email" value="@email" @Validation.For("email") />
+                @* Wypisanie wszelkich błędów weryfikacji adresu e-mail na stronie *@
+                @Html.ValidationMessage("email")
+            </li>
+            <li class="haslo">
+                <label for="haslo" @if(!ModelState.IsValidField("haslo")) {<text>class="error-label"</text>}>Hasło</label>
+                <input type="password" id="haslo" name="haslo" @Validation.For("haslo") />
+                @* Wypisanie wszelkich błędów weryfikacji hasła na stronie *@
+                @Html.ValidationMessage("haslo")
+            </li>
+            <li class="confirm-password">
+                <label for="confirmPassword" @if(!ModelState.IsValidField("confirmPassword")) {<text>class="error-label"</text>}>Potwierdź hasło</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" @Validation.For("confirmPassword") />
+                @* Wypisanie wszelkich błędów weryfikacji hasła na stronie *@
+                @Html.ValidationMessage("confirmPassword")
+            </li>
+
+        </ol>
+        <input type="submit" value="Zarejestruj się" />
+    </fieldset>
+</form>

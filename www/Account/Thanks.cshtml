@@ -1,0 +1,25 @@
+﻿@{
+    // Ustaw układ i tytuł strony
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Dziękujemy za rejestrację";
+}
+
+@if (!WebSecurity.IsAuthenticated) {
+    <hgroup class="title">
+        <h1>@Page.Title.</h1>
+        <h2>Ale nie wszystko jest jeszcze gotowe.</h2>
+    </hgroup>
+
+    <p>
+       Wkrótce otrzymasz wiadomość e-mail z instrukcjami dotyczącymi aktywowania konta.
+    </p>
+} else {
+    <hgroup class="title">
+        <h1>@Page.Title.</h1>
+        <h2>Wszystko jest ustawione.</h2>
+    </hgroup>
+
+    <p>
+        Najwyraźniej konto zostało już potwierdzone i możesz zacząć z niego korzystać.
+    </p>
+}
