@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Strona potwierdzenia rejestracji";
+
+    string message = "";
+    var confirmationToken = Request["confirmationCode"];
+
+    WebSecurity.Logout();
+    if (!confirmationToken.IsEmpty()) {
+        if (WebSecurity.ConfirmAccount(confirmationToken)) {
+            message = "Rejestracja została potwierdzona. Kliknij kartę logowania, aby zalogować się do witryny.";
+        } else {
+            message = "Nie można potwierdzić informacji podanych podczas rejestracji.";
+        }
+    }
+}
+
+<hgroup class="title">
+    <h1>@Page.Title.</h1>
+    <h2>Potwierdź konto przy użyciu poniższego formularza.</h2>
+</hgroup>
+
+@if (!message.IsEmpty()) {
+    <p>@message</p>
+} else {
+    <form method="post">
+        <fieldset>
+            <legend>Kod potwierdzenia</legend>
+            <ol>
+                <li>
+                    <label for="confirmationCode">Kod potwierdzenia</label>
+                    <input type="text" id="confirmationCode" name="confirmationCode" />
+                </li>
+            </ol>
+            <input type="submit" value="Potwierdź" />
+        </fieldset>
+    </form>
+}

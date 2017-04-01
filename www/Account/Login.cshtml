@@ -1,0 +1,105 @@
+﻿@* W przypadku korzystania z pakietów usuń tę sekcję *@
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Logowanie";
+
+    // Zainicjuj ogólne zmienne strony
+    var nick = "";
+    var haslo = "";
+    var rememberMe = false;
+
+    //var returnUrl = Request.QueryString["ReturnUrl"];
+    //if (returnUrl.IsEmpty()) {
+    //    // Niektórzy dostawcy logowania zewnętrznego zawsze wymagają wartości zwrotnego adresu URL
+    //    returnUrl = Href("~/");
+    //}
+
+    // Setup validation
+    Validation.RequireField("nick", "Musisz podać swój nick.");
+    Validation.RequireField("password", "Musisz określić hasło.");
+    Validation.Add("password",
+        Validator.StringLength(
+            maxLength: Int32.MaxValue,
+            minLength: 6,
+            errorMessage: "Hasło musi mieć co najmniej 6 znaków"));
+
+    // Jeśli jest to żądanie POST, zweryfikuj dane i przetwórz je
+    if (IsPost)
+    {
+        AntiForgery.Validate();
+        // czy to jest żądanie logowania zewnętrznego?
+        //string provider = Request.Form["provider"];
+        //if (!provider.IsEmpty()) {
+        //    OAuthWebSecurity.RequestAuthentication(provider, Href("~/Account/RegisterService", new { returnUrl }));
+        //    return;
+        //} else if (Validation.IsValid()) {
+        nick = Request.Form["nick"];
+        haslo = Request.Form["haslo"];
+        rememberMe = Request.Form["rememberMe"].AsBool();
+
+        if (WebSecurity.UserExists(nick) && WebSecurity.GetPasswordFailuresSinceLastSuccess(nick) > 4 && WebSecurity.GetLastPasswordFailureDate(nick).AddSeconds(60) > DateTime.UtcNow)
+        {
+            Response.Redirect("~/Account/AccountLockedOut");
+            return;
+        }
+
+        //// Próba zalogowania się za pomocą podanych poświadczeń
+        //if (WebSecurity.Login(email, password, rememberMe)) {
+        //    Context.RedirectLocal(returnUrl);
+        //    return;
+        //} else {
+        ModelState.AddFormError("Podana nazwa użytkownika lub hasło jest niepoprawne.");
+    }
+
+}
+}
+
+<hgroup class="title">
+    <h1>@Page.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+    <h2>Zaloguj się za pomocą konta lokalnego.</h2>
+    <form action="https://freeshell.de/~fil1995/api/user_stan_konta.php" method="post">
+        @AntiForgery.GetHtml()
+        @* Jeśli występuje choć jeden błąd weryfikacji, pokaż błąd *@
+        @Html.ValidationSummary("Logowanie nie powiodło się. Popraw błędy i ponów próbę.", excludeFieldErrors: true, htmlAttributes: null)
+
+        <fieldset>
+            <legend>Zaloguj się do konta</legend>
+            <ol>
+                <li class="nick">
+                    <label for="nick" @if (!ModelState.IsValidField("nick")) { <text> class="error-label" </text> }>Nick</label>
+                    <input type="text" id="nick" name="nick" value="@nick" @Validation.For("nick") />
+                    @* Wypisz wszelkie błędy weryfikacji nazwy użytkownika na stronie *@
+                    @Html.ValidationMessage("nick")
+                </li>
+                <li class="haslo">
+                    <label for="haslo" @if (!ModelState.IsValidField("haslo")) { <text> class="error-label" </text> }>Hasło</label>
+                    <input type="password" id="haslo" name="haslo" @Validation.For("haslo") />
+                    @* Wypisz wszelkie błędy weryfikacji hasła na stronie *@
+                    @Html.ValidationMessage("haslo")
+                </li>
+                <li class="remember-me">
+                    <input type="checkbox" id="rememberMe" name="rememberMe" value="true" checked="@rememberMe" />
+                    <label class="checkbox" for="rememberMe">Zapamiętaj mnie?</label>
+                </li>
+            </ol>
+            <input type="submit" value="Zaloguj" />
+        </fieldset>
+    </form>
+    <p>
+        <a href="~/Account/Register">Nie masz konta?</a>
+        <a href="~/Account/ForgotPassword">Nie pamiętasz hasła?</a>
+    </p>
+</section>
+
+@*<section class="social" id="socialLoginForm">
+    <h2>Zaloguj się za pomocą innej usługi.</h2>
+    @RenderPage("~/Account/_ExternalLoginsList.cshtml")
+</section>*@
