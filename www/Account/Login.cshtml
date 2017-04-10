@@ -13,11 +13,12 @@
     var haslo = "";
     var rememberMe = false;
 
-    //var returnUrl = Request.QueryString["ReturnUrl"];
-    //if (returnUrl.IsEmpty()) {
-    //    // Niektórzy dostawcy logowania zewnętrznego zawsze wymagają wartości zwrotnego adresu URL
-    //    returnUrl = Href("~/");
-    //}
+    var returnUrl = Request.QueryString["ReturnUrl"];
+    if (returnUrl.IsEmpty())
+    {
+        // Niektórzy dostawcy logowania zewnętrznego zawsze wymagają wartości zwrotnego adresu URL
+        returnUrl = Href("~/");
+    }
 
     // Setup validation
     Validation.RequireField("nick", "Musisz podać swój nick.");
@@ -32,12 +33,6 @@
     if (IsPost)
     {
         AntiForgery.Validate();
-        // czy to jest żądanie logowania zewnętrznego?
-        //string provider = Request.Form["provider"];
-        //if (!provider.IsEmpty()) {
-        //    OAuthWebSecurity.RequestAuthentication(provider, Href("~/Account/RegisterService", new { returnUrl }));
-        //    return;
-        //} else if (Validation.IsValid()) {
         nick = Request.Form["nick"];
         haslo = Request.Form["haslo"];
         rememberMe = Request.Form["rememberMe"].AsBool();
@@ -48,15 +43,19 @@
             return;
         }
 
-        //// Próba zalogowania się za pomocą podanych poświadczeń
-        //if (WebSecurity.Login(email, password, rememberMe)) {
-        //    Context.RedirectLocal(returnUrl);
-        //    return;
-        //} else {
-        ModelState.AddFormError("Podana nazwa użytkownika lub hasło jest niepoprawne.");
-    }
+        // Próba zalogowania się za pomocą podanych poświadczeń
+        if (WebSecurity.Login(nick, haslo, rememberMe))
+        {
+            Context.RedirectLocal(returnUrl);
+            return;
+        }
+        else
+        {
+            
+            ModelState.AddFormError("Podanaaaa nazwa użytkownika lub hasło jest niepoprawne.");
+        }
 
-}
+    }
 }
 
 <hgroup class="title">
@@ -65,7 +64,7 @@
 
 <section id="loginForm">
     <h2>Zaloguj się za pomocą konta lokalnego.</h2>
-    <form action="https://freeshell.de/~fil1995/api/user_stan_konta.php" method="post">
+    <form method="post">
         @AntiForgery.GetHtml()
         @* Jeśli występuje choć jeden błąd weryfikacji, pokaż błąd *@
         @Html.ValidationSummary("Logowanie nie powiodło się. Popraw błędy i ponów próbę.", excludeFieldErrors: true, htmlAttributes: null)
@@ -98,8 +97,3 @@
         <a href="~/Account/ForgotPassword">Nie pamiętasz hasła?</a>
     </p>
 </section>
-
-@*<section class="social" id="socialLoginForm">
-    <h2>Zaloguj się za pomocą innej usługi.</h2>
-    @RenderPage("~/Account/_ExternalLoginsList.cshtml")
-</section>*@

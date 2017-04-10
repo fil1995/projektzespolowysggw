@@ -32,7 +32,15 @@
         email = Request.Form["email"];
         haslo = Request.Form["haslo"];
         confirmPassword = Request.Form["confirmPassword"];
+        if (!WebSecurity.ConfirmAccount(nick))
+        {
+            WebSecurity.CreateUserAndAccount(nick,haslo);
+        }
+        else
+        {
+            ModelState.AddFormError("Coś nie pykło.");
 
+        }
 
     }
 }
@@ -41,7 +49,7 @@
     <h2>Utwórz nowe konto.</h2>
 </hgroup>
 
-<form action="https://freeshell.de/~fil1995/api/user_dodaj.php" method="post">
+<form method="post">
     @AntiForgery.GetHtml()
     @* Jeśli istnieje co najmniej jeden błąd weryfikacji, powiadomienie użytkownika *@
     @Html.ValidationSummary("Próba utworzenia konta nie powiodła się. Popraw błędy i ponów próbę.", excludeFieldErrors: true, htmlAttributes: null)

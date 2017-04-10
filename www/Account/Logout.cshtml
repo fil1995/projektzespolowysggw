@@ -7,7 +7,7 @@
 
         // Wyloguj z bieżącego kontekstu użytkownika
         WebSecurity.Logout();
-
+        
         // Przekieruj z powrotem pod zwrotny adres URL lub do strony głównej.
         var returnUrl = Request.QueryString["ReturnUrl"];
         Context.RedirectLocal(returnUrl);
