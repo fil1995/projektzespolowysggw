@@ -9,9 +9,12 @@
     Page.Title = "Logowanie";
 
     // Zainicjuj ogólne zmienne strony
-    var nick = "";
-    var haslo = "";
+    var username = "";
+    var userPassword = "";
     var rememberMe = false;
+    var funkcja = "authenticate";
+    var kluczdostepu = "OstryZBaraninaNaC13nk1m!";
+ 
 
     var returnUrl = Request.QueryString["ReturnUrl"];
     if (returnUrl.IsEmpty())
@@ -21,41 +24,41 @@
     }
 
     // Setup validation
-    Validation.RequireField("nick", "Musisz podać swój nick.");
-    Validation.RequireField("password", "Musisz określić hasło.");
+    Validation.RequireField("username", "Musisz podać swój username.");
+    Validation.RequireField("password", "Musisz określić userPassword.");
     Validation.Add("password",
         Validator.StringLength(
             maxLength: Int32.MaxValue,
             minLength: 6,
-            errorMessage: "Hasło musi mieć co najmniej 6 znaków"));
+            errorMessage: "userPassword musi mieć co najmniej 6 znaków"));
 
     // Jeśli jest to żądanie POST, zweryfikuj dane i przetwórz je
     if (IsPost)
     {
         AntiForgery.Validate();
-        nick = Request.Form["nick"];
-        haslo = Request.Form["haslo"];
+        username = Request.Form["username"];
+        userPassword = Request.Form["userPassword"];
         rememberMe = Request.Form["rememberMe"].AsBool();
-
-        if (WebSecurity.UserExists(nick) && WebSecurity.GetPasswordFailuresSinceLastSuccess(nick) > 4 && WebSecurity.GetLastPasswordFailureDate(nick).AddSeconds(60) > DateTime.UtcNow)
-        {
-            Response.Redirect("~/Account/AccountLockedOut");
-            return;
-        }
-
-        // Próba zalogowania się za pomocą podanych poświadczeń
-        if (WebSecurity.Login(nick, haslo, rememberMe))
-        {
-            Context.RedirectLocal(returnUrl);
-            return;
-        }
-        else
-        {
-            
-            ModelState.AddFormError("Podanaaaa nazwa użytkownika lub hasło jest niepoprawne.");
-        }
-
     }
+
+    //if (WebSecurity.UserExists(username) && WebSecurity.GetPasswordFailuresSinceLastSuccess(username) > 4 && WebSecurity.GetLastPasswordFailureDate(username).AddSeconds(60) > DateTime.UtcNow)
+    //{
+    //    Response.Redirect("~/Account/AccountLockedOut");
+    //    return;
+    //}
+
+    //// Próba zalogowania się za pomocą podanych poświadczeń
+    //if (WebSecurity.Login(username, userPassword, rememberMe))
+    //{
+    //    Context.RedirectLocal(returnUrl);
+    //    return;
+    //}
+    //else
+    //{
+
+    //    ModelState.AddFormError("Podana nazwa użytkownika lub userPassword jest niepoprawne.");
+    //}
+
 }
 
 <hgroup class="title">
@@ -64,25 +67,26 @@
 
 <section id="loginForm">
     <h2>Zaloguj się za pomocą konta lokalnego.</h2>
-    <form method="post">
+    <form method="post" action="http://kasynobackend-wygoda.rhcloud.com/backend/user">
         @AntiForgery.GetHtml()
         @* Jeśli występuje choć jeden błąd weryfikacji, pokaż błąd *@
         @Html.ValidationSummary("Logowanie nie powiodło się. Popraw błędy i ponów próbę.", excludeFieldErrors: true, htmlAttributes: null)
-
+        <input type="hidden" id="password" name="password" value="@kluczdostepu" />
+        <input type="hidden" id="function" name="function" value="@funkcja" />
         <fieldset>
             <legend>Zaloguj się do konta</legend>
             <ol>
-                <li class="nick">
-                    <label for="nick" @if (!ModelState.IsValidField("nick")) { <text> class="error-label" </text> }>Nick</label>
-                    <input type="text" id="nick" name="nick" value="@nick" @Validation.For("nick") />
+                <li class="username">
+                    <label for="username" @if (!ModelState.IsValidField("username")) { <text> class="error-label" </text> }>username</label>
+                    <input type="text" id="id" name="id" value="@username" @Validation.For("username") />
                     @* Wypisz wszelkie błędy weryfikacji nazwy użytkownika na stronie *@
-                    @Html.ValidationMessage("nick")
+                    @Html.ValidationMessage("username")
                 </li>
-                <li class="haslo">
-                    <label for="haslo" @if (!ModelState.IsValidField("haslo")) { <text> class="error-label" </text> }>Hasło</label>
-                    <input type="password" id="haslo" name="haslo" @Validation.For("haslo") />
+                <li class="userPassword">
+                    <label for="userPassword" @if (!ModelState.IsValidField("userPassword")) { <text> class="error-label" </text> }>userPassword</label>
+                    <input type="password" id="userPassword" name="userPassword" @Validation.For("userPassword") />
                     @* Wypisz wszelkie błędy weryfikacji hasła na stronie *@
-                    @Html.ValidationMessage("haslo")
+                    @Html.ValidationMessage("userPassword")
                 </li>
                 <li class="remember-me">
                     <input type="checkbox" id="rememberMe" name="rememberMe" value="true" checked="@rememberMe" />

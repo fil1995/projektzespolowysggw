@@ -5,78 +5,92 @@
 }
 
 @{
+
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Zarejestruj się";
 
     // Inicjowanie ogólnych zmiennych strony
-    var nick = "";
-    var email = "";
-    var haslo = "";
+    var username = "";
+    var userPassword = "";
     var confirmPassword = "";
-
+    string responseString = "";
+    string title = "Utwórz nowe konto.";
     // Konfiguracja weryfikacji
-    Validation.RequireField("email", "Musisz podać adres e-mail.");
-    Validation.RequireField("haslo", "Hasło nie może być puste.");
+    Validation.RequireField("username", "username nie może być pusty.");
+    Validation.RequireField("userPassword", "userPassword nie może być puste.");
+    Validation.RequireField("confirmPassword", "Potwierdzenie hasła nie może być puste.");
+    Validation.Add("username", Validator.StringLength(20, 2, "username musi mieć minimum 2 znaki i max 20"));
     Validation.Add("confirmPassword",
-        Validator.EqualsTo("haslo", "Hasło i potwierdzenie hasła są niezgodne."));
-    Validation.Add("haslo",
+    Validator.EqualsTo("userPassword", "userPassword i potwierdzenie hasła są niezgodne."));
+    Validation.Add("userPassword",
         Validator.StringLength(
-            maxLength: Int32.MaxValue,
+            maxLength: 50,
             minLength: 6,
-            errorMessage: "Hasło musi mieć co najmniej 6 znaków"));
+            errorMessage: "userPassword musi mieć co najmniej 6 znaków i max 50."));
 
     // W przypadku żądania POST weryfikacja i przetwarzanie danych
     if (IsPost) {
         AntiForgery.Validate();
-        nick = Request.Form["nick"];
-        email = Request.Form["email"];
-        haslo = Request.Form["haslo"];
+
+        username = Request.Form["username"];
+        userPassword = Request.Form["userPassword"];
         confirmPassword = Request.Form["confirmPassword"];
-        if (!WebSecurity.ConfirmAccount(nick))
+
+        using (var client = new WebClient())
         {
-            WebSecurity.CreateUserAndAccount(nick,haslo);
-        }
-        else
-        {
-            ModelState.AddFormError("Coś nie pykło.");
+            var values = new System.Collections.Specialized.NameValueCollection();
+            values["password"] = "OstryZBaraninaNaC13nk1m!";
+            values["function"] = "register";
+            values["username"] = username;
+            values["userPassword"] = userPassword;
+
+
+            var response = client.UploadValues("http://kasynobackend-wygoda.rhcloud.com/backend/user", values);
+
+            responseString = System.Text.Encoding.Default.GetString(response);
+            Newtonsoft.Json.Linq.JObject jsonPOST = Newtonsoft.Json.Linq.JObject.Parse(responseString);
+            if ((string)jsonPOST["error"] != "")
+            {
+                title = (string)jsonPOST["error"];
+            }
+            if ((string)jsonPOST["status"] == "OK")
+            {
+                title = "Rejestracja przebiegła pomyślnie";
+                Response.AddHeader("REFRESH", "3;URL=login");
+            }
 
         }
-
     }
+
 }
+
 <hgroup class="title">
-    <h1>@Page.Title.</h1>
-    <h2>Utwórz nowe konto.</h2>
+    <h1>@title</h1>
 </hgroup>
 
 <form method="post">
     @AntiForgery.GetHtml()
     @* Jeśli istnieje co najmniej jeden błąd weryfikacji, powiadomienie użytkownika *@
     @Html.ValidationSummary("Próba utworzenia konta nie powiodła się. Popraw błędy i ponów próbę.", excludeFieldErrors: true, htmlAttributes: null)
-
+    @*<input type="hidden" id="password" name="password" value="@kluczdostepu" />
+    <input type="hidden" id="function" name="function" value="@funkcja" />*@
     <fieldset>
         <legend>Formularz rejestracji</legend>
         <ol>
-            <li class="nick">
-                <label>Nick</label>
-                <input type="text" id="nick" name="nick" value="@nick" @Validation.For("nick") />
-                @* Wypisanie wszelkich błędów weryfikacji nicku na stronie *@
-                @Html.ValidationMessage("nick")
+            <li class="username">
+                <label>username</label>
+                <input type="text" id="username" name="username" value="@username" @Validation.For("username") />
+                @* Wypisanie wszelkich błędów weryfikacji usernameu na stronie *@
+                @Html.ValidationMessage("username")
             </li>
-            <li class="email">
-                <label for="email" @if(!ModelState.IsValidField("email")){<text>class="error-label"</text>}>Adres e-mail</label>
-                <input type="text" id="email" name="email" value="@email" @Validation.For("email") />
-                @* Wypisanie wszelkich błędów weryfikacji adresu e-mail na stronie *@
-                @Html.ValidationMessage("email")
-            </li>
-            <li class="haslo">
-                <label for="haslo" @if(!ModelState.IsValidField("haslo")) {<text>class="error-label"</text>}>Hasło</label>
-                <input type="password" id="haslo" name="haslo" @Validation.For("haslo") />
+            <li class="userPassword">
+                <label for="userPassword" @if(!ModelState.IsValidField("userPassword")) {<text>class="error-label"</text>}>userPassword</label>
+                <input type="password" id="userPassword" name="userPassword" @Validation.For("userPassword") />
                 @* Wypisanie wszelkich błędów weryfikacji hasła na stronie *@
-                @Html.ValidationMessage("haslo")
+                @Html.ValidationMessage("userPassword")
             </li>
             <li class="confirm-password">
-                <label for="confirmPassword" @if(!ModelState.IsValidField("confirmPassword")) {<text>class="error-label"</text>}>Potwierdź hasło</label>
+                <label for="confirmPassword" @if(!ModelState.IsValidField("confirmPassword")) {<text>class="error-label"</text>}>Potwierdź userPassword</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" @Validation.For("confirmPassword") />
                 @* Wypisanie wszelkich błędów weryfikacji hasła na stronie *@
                 @Html.ValidationMessage("confirmPassword")

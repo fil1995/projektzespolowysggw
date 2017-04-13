@@ -22,7 +22,8 @@
                     <section id="login">
                         @if (WebSecurity.IsAuthenticated) {
                             <text>
-                                Witaj, <a class="email" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a>!
+
+                                Witaj, <a class="email" href="~/Account/Manage" title="Manage">AA</a>!
                                 <form id="logoutForm" action="~/Account/Logout" method="post">
                                     @AntiForgery.GetHtml()
                                     <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>

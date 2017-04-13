@@ -14,14 +14,14 @@
 
     var action = Request.Form["action"];
 
-    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.CurrentUserId);
+    bool HasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.CurrentUserId);
 
     string successMessage = "";
     var message = Request.QueryString["message"];
     if (message == "ChangedPassword") {
-        successMessage = "Hasło zostało zmienione.";
+        successMessage = "userPassword zostało zmienione.";
     } else if (message == "SetPassword") {
-        successMessage = "Hasło zostało ustawione.";
+        successMessage = "userPassword zostało ustawione.";
     } else if (message == "RemovedLogin") {
         successMessage = "Logowanie zewnętrzne zostało usunięte.";
     }
@@ -31,26 +31,26 @@
          let clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider)
          select new { Provider = account.Provider, ProviderDisplayName = clientData.DisplayName, UserId = account.ProviderUserId })
         .ToList();
-    bool canRemoveLogin = externalLogins.Count > 1 || hasLocalAccount;
+    bool canRemoveLogin = externalLogins.Count > 1 || HasLocalAccount;
 
     // Konfiguracja weryfikacji
-    if (hasLocalAccount) {
+    if (HasLocalAccount) {
         Validation.RequireField("currentPassword", "Pole bieżącego hasła jest wymagane.");
         Validation.Add("currentPassword",
             Validator.StringLength(
                 maxLength: Int32.MaxValue,
                 minLength: 6,
-                errorMessage: "Bieżące hasło musi mieć co najmniej 6 znaków"));
+                errorMessage: "Bieżące userPassword musi mieć co najmniej 6 znaków"));
     }
     Validation.RequireField("newPassword", "Pole nowego hasła jest wymagane.");
     Validation.Add("confirmPassword",
         Validator.Required("Pole potwierdzenia nowego hasła jest wymagane."),
-        Validator.EqualsTo("newPassword", "Nowe hasło i potwierdzenie hasła są niezgodne."));
+        Validator.EqualsTo("newPassword", "Nowe userPassword i potwierdzenie hasła są niezgodne."));
     Validation.Add("newPassword",
         Validator.StringLength(
             maxLength: Int32.MaxValue,
             minLength: 6,
-            errorMessage: "Nowe hasło musi mieć co najmniej 6 znaków"));
+            errorMessage: "Nowe userPassword musi mieć co najmniej 6 znaków"));
 
     if (IsPost) {
         AntiForgery.Validate();
@@ -61,7 +61,7 @@
             var confirmPassword = Request.Form["confirmPassword"];
 
             if (Validation.IsValid()) {
-                if (hasLocalAccount) {
+                if (HasLocalAccount) {
                     if (WebSecurity.ChangePassword(WebSecurity.CurrentUserName, currentPassword, newPassword)) {
                         Response.Redirect("~/Account/Manage?message=ChangedPassword");
                         return;
@@ -117,11 +117,11 @@
 
 <p>Zalogowano jako <strong>@WebSecurity.CurrentUserName</strong>.</p>
 
-@if (hasLocalAccount) {
-    <h3>Zmień hasło</h3>
+@if (HasLocalAccount) {
+    <h3>Zmień userPassword</h3>
 } else {
     <p>
-        Nie masz hasła lokalnego dla tej witryny. Dodaj hasło lokalne, aby móc się logować bez używania logowania zewnętrznego.
+        Nie masz hasła lokalnego dla tej witryny. Dodaj userPassword lokalne, aby móc się logować bez używania logowania zewnętrznego.
     </p>
 }
 
@@ -131,38 +131,38 @@
 
     <fieldset>
         <legend>
-        @if (hasLocalAccount) {
+        @if (HasLocalAccount) {
             <text>Formularz zmiany hasła</text>
         } else {
             <text>Formularz ustawiania hasła</text>
         }
         </legend>
         <ol>
-            @if (hasLocalAccount) {
+            @if (HasLocalAccount) {
                 <li class="current-password">
-                    <label for="currentPassword" @if (!ModelState.IsValidField("currentPassword")) {<text>class="error-label"</text>}>Bieżące hasło</label>
+                    <label for="currentPassword" @if (!ModelState.IsValidField("currentPassword")) {<text>class="error-label"</text>}>Bieżące userPassword</label>
                     <input type="password" id="currentPassword" name="currentPassword" @Validation.For("currentPassword")/>
                     @Html.ValidationMessage("currentPassword")
                 </li>
             }
             <li class="new-password">
-                <label for="newPassword" @if (!ModelState.IsValidField("newPassword")) {<text>class="error-label"</text>}>Nowe hasło</label>
+                <label for="newPassword" @if (!ModelState.IsValidField("newPassword")) {<text>class="error-label"</text>}>Nowe userPassword</label>
                 <input type="password" id="newPassword" name="newPassword" @Validation.For("newPassword")/>
                 @Html.ValidationMessage("newPassword")
             </li>
             <li class="confirm-password">
-                <label for="confirmPassword" @if (!ModelState.IsValidField("confirmPassword")) {<text>class="error-label"</text>}>Potwierdź nowe hasło</label>
+                <label for="confirmPassword" @if (!ModelState.IsValidField("confirmPassword")) {<text>class="error-label"</text>}>Potwierdź nowe userPassword</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" @Validation.For("confirmPassword")/>
                 @Html.ValidationMessage("confirmPassword")
             </li>
         </ol>
-        @if (hasLocalAccount) {
-            <button type="submit" name="action" value="password">Zmień hasło</button>
+        @if (HasLocalAccount) {
+            <button type="submit" name="action" value="password">Zmień userPassword</button>
             <p>
                 Kliknij <a href="~/Account/ForgotPassword" title="Strona Nie pamiętam hasła">tutaj</a>, jeśli nie pamiętasz hasła.
             </p>
         } else {
-            <button type="submit" name="action" value="password">Ustaw hasło</button>
+            <button type="submit" name="action" value="password">Ustaw userPassword</button>
         }
     </fieldset>
 </form>
