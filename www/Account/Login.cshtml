@@ -11,17 +11,7 @@
     // Zainicjuj ogólne zmienne strony
     var username = "";
     var userPassword = "";
-    var rememberMe = false;
-    var funkcja = "authenticate";
-    var kluczdostepu = "OstryZBaraninaNaC13nk1m!";
- 
-
-    var returnUrl = Request.QueryString["ReturnUrl"];
-    if (returnUrl.IsEmpty())
-    {
-        // Niektórzy dostawcy logowania zewnętrznego zawsze wymagają wartości zwrotnego adresu URL
-        returnUrl = Href("~/");
-    }
+    string title = "Logowanie.";
 
     // Setup validation
     Validation.RequireField("username", "Musisz podać swój username.");
@@ -38,47 +28,34 @@
         AntiForgery.Validate();
         username = Request.Form["username"];
         userPassword = Request.Form["userPassword"];
-        rememberMe = Request.Form["rememberMe"].AsBool();
+        title = POST.Login(username, userPassword);
+        if (POST.autoryzowany)
+        {
+            POST.autoryzowany = false;
+            //rozpoczęcie sesji
+            Session["username"] = username;
+            //przekierowanie na stronę główną
+            Response.AddHeader("REFRESH", "2;URL=../");
+        }
     }
 
-    //if (WebSecurity.UserExists(username) && WebSecurity.GetPasswordFailuresSinceLastSuccess(username) > 4 && WebSecurity.GetLastPasswordFailureDate(username).AddSeconds(60) > DateTime.UtcNow)
-    //{
-    //    Response.Redirect("~/Account/AccountLockedOut");
-    //    return;
-    //}
-
-    //// Próba zalogowania się za pomocą podanych poświadczeń
-    //if (WebSecurity.Login(username, userPassword, rememberMe))
-    //{
-    //    Context.RedirectLocal(returnUrl);
-    //    return;
-    //}
-    //else
-    //{
-
-    //    ModelState.AddFormError("Podana nazwa użytkownika lub userPassword jest niepoprawne.");
-    //}
 
 }
-
 <hgroup class="title">
-    <h1>@Page.Title.</h1>
+    <h1>@title</h1>
 </hgroup>
 
 <section id="loginForm">
-    <h2>Zaloguj się za pomocą konta lokalnego.</h2>
-    <form method="post" action="http://kasynobackend-wygoda.rhcloud.com/backend/user">
+    <form method="post">
         @AntiForgery.GetHtml()
         @* Jeśli występuje choć jeden błąd weryfikacji, pokaż błąd *@
         @Html.ValidationSummary("Logowanie nie powiodło się. Popraw błędy i ponów próbę.", excludeFieldErrors: true, htmlAttributes: null)
-        <input type="hidden" id="password" name="password" value="@kluczdostepu" />
-        <input type="hidden" id="function" name="function" value="@funkcja" />
         <fieldset>
             <legend>Zaloguj się do konta</legend>
             <ol>
                 <li class="username">
                     <label for="username" @if (!ModelState.IsValidField("username")) { <text> class="error-label" </text> }>username</label>
-                    <input type="text" id="id" name="id" value="@username" @Validation.For("username") />
+                    <input type="text" id="username" name="username" value="@username" @Validation.For("username") />
                     @* Wypisz wszelkie błędy weryfikacji nazwy użytkownika na stronie *@
                     @Html.ValidationMessage("username")
                 </li>
@@ -87,10 +64,6 @@
                     <input type="password" id="userPassword" name="userPassword" @Validation.For("userPassword") />
                     @* Wypisz wszelkie błędy weryfikacji hasła na stronie *@
                     @Html.ValidationMessage("userPassword")
-                </li>
-                <li class="remember-me">
-                    <input type="checkbox" id="rememberMe" name="rememberMe" value="true" checked="@rememberMe" />
-                    <label class="checkbox" for="rememberMe">Zapamiętaj mnie?</label>
                 </li>
             </ol>
             <input type="submit" value="Zaloguj" />

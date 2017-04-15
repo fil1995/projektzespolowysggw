@@ -13,7 +13,6 @@
     var username = "";
     var userPassword = "";
     var confirmPassword = "";
-    string responseString = "";
     string title = "Utwórz nowe konto.";
     // Konfiguracja weryfikacji
     Validation.RequireField("username", "username nie może być pusty.");
@@ -35,30 +34,13 @@
         username = Request.Form["username"];
         userPassword = Request.Form["userPassword"];
         confirmPassword = Request.Form["confirmPassword"];
-
-        using (var client = new WebClient())
+        //Żądanie POST do serwera:
+        title = POST.Register(username, userPassword);
+        if (POST.autoryzowany)
         {
-            var values = new System.Collections.Specialized.NameValueCollection();
-            values["password"] = "OstryZBaraninaNaC13nk1m!";
-            values["function"] = "register";
-            values["username"] = username;
-            values["userPassword"] = userPassword;
-
-
-            var response = client.UploadValues("http://kasynobackend-wygoda.rhcloud.com/backend/user", values);
-
-            responseString = System.Text.Encoding.Default.GetString(response);
-            Newtonsoft.Json.Linq.JObject jsonPOST = Newtonsoft.Json.Linq.JObject.Parse(responseString);
-            if ((string)jsonPOST["error"] != "")
-            {
-                title = (string)jsonPOST["error"];
-            }
-            if ((string)jsonPOST["status"] == "OK")
-            {
-                title = "Rejestracja przebiegła pomyślnie";
-                Response.AddHeader("REFRESH", "3;URL=login");
-            }
-
+            POST.autoryzowany = false;
+            //przekierowanie na stronę główną
+            Response.AddHeader("REFRESH", "2;URL=login");
         }
     }
 

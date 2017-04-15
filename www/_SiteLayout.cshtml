@@ -20,10 +20,12 @@
                 </div>
                 <div class="float-right">
                     <section id="login">
-                        @if (WebSecurity.IsAuthenticated) {
+                        @if (Session["username"]!=null) {
                             <text>
 
-                                Witaj, <a class="email" href="~/Account/Manage" title="Manage">AA</a>!
+                                Witaj, @Session["username"]!
+                                <a href="~/Account/Manage" title="Manage">Zarządzaj kontem</a>
+                                
                                 <form id="logoutForm" action="~/Account/Logout" method="post">
                                     @AntiForgery.GetHtml()
                                     <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
