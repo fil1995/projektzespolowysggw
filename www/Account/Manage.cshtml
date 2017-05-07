@@ -18,42 +18,24 @@
 
 
     string title = "Zarządzanie kontem";
-    string username = Session["username"].ToString();
+    string username = "";
+    if (Session["username"] != null)
+    {
+        username = Session["username"].ToString();
+    }
+
     var nowaKwota = "";
     var action = "";
 
     Validation.RequireField("nowaKwota", "Musisz wprowadzić kwotę doładowania");
     Validation.Add("nowaKwota", Validator.Float("ss"));
-    //// Konfiguracja weryfikacji do zmiany hasła:
-    //Validation.RequireField("currentPassword", "Pole bieżącego hasła jest wymagane.");
-    //Validation.Add("currentPassword",
-    //    Validator.StringLength(
-    //        maxLength: Int32.MaxValue,
-    //        minLength: 6,
-    //        errorMessage: "Bieżące userPassword musi mieć co najmniej 6 znaków"));
-
-    //Validation.RequireField("newPassword", "Pole nowego hasła jest wymagane.");
-    //Validation.Add("confirmPassword",
-    //    Validator.Required("Pole potwierdzenia nowego hasła jest wymagane."),
-    //    Validator.EqualsTo("newPassword", "Nowe userPassword i potwierdzenie hasła są niezgodne."));
-    //Validation.Add("newPassword",
-    //    Validator.StringLength(
-    //        maxLength: Int32.MaxValue,
-    //        minLength: 6,
-    //        errorMessage: "Nowe userPassword musi mieć co najmniej 6 znaków"));
 
     if (IsPost)
     {
         AntiForgery.Validate();
         action = Request.Form["action"];
         nowaKwota = Request.Form["nowaKwota"];
-        //if (action == "password")
-        //{
-        //    // Obsługa operacji hasła konta lokalnego
-        //    //var currentPassword = Request.Form["currentPassword"];
-        //    //var newPassword = Request.Form["newPassword"];
-        //    //var confirmPassword = Request.Form["confirmPassword"];
-        //} action="~/Account/Logout"
+
         if (action == "delete")
         {
             AntiForgery.Validate();
@@ -68,82 +50,77 @@
 
     }
 
-    if (@Session["username"] == null)
-    {
-        title = "Nie jesteś zalogowany.";
-        <hgroup class="title">
-            <h1>@title.</h1>
-        </hgroup>
-    }
-    else
-    {
-
-        <hgroup class="title">
-            <h1>@title.</h1>
-        </hgroup>
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12 text-center">
 
 
+                    @{
+                        if (@Session["username"] == null)
+                        {
+                            title = "Nie jesteś zalogowany";
+                            <hgroup class="title">
+                                <h1>@title</h1>
+                            </hgroup>
+                        }
+                        else
+                        {
 
-        <p>Zalogowano jako <strong>@Session["username"]</strong>.</p>
-
-
-        <h3>Informacje o użytkowniku:</h3>
-        <h5>ID: </h5>@POST.getUser("id", Session["username"].ToString());
-        <h5>NAZWA UŻYTKOWNIKA: </h5>@POST.getUser("username", Session["username"].ToString());
-        <h5>STAN KONTA: </h5>@POST.getUser("balance", Session["username"].ToString());
-
-
-        <h3>Usuń użytkownika:</h3>
-        <fieldset>
-            <form method="post">
-                @AntiForgery.GetHtml()
-                <button type="submit" onclick="return pokaz_confirm()" name="action" value="delete">Kliknij aby siebie usunąć</button>
-            </form>
-        </fieldset>
-        <h3>Zmień stan konta:</h3>
-        <fieldset>
-            <form method="post">
-                @AntiForgery.GetHtml()
-                <ol>
-                    <input type="number" id="nowaKwota" name="nowaKwota" value="@nowaKwota" @Validation.For("nowaKwota") />
-                    @Html.ValidationMessage("nowaKwota")
-                </ol>
-                <button type="submit" name="action" value="stanKonta">Doładuj konto :D</button>
-            </form>
-        </fieldset>
-        //gdyby się chciało zmieniać hasło:
-        @*<h3>Zmień userPassword</h3>*@
-        @*<form method="post">
-                @AntiForgery.GetHtml()
-                @Html.ValidationSummary(excludeFieldErrors: true)
-
-                <fieldset>
-                    <legend>
-                        <text>Formularz zmiany hasła</text>
-                    </legend>
-                    <ol>
-                        <li class="current-password">
-                            <label for="currentPassword" @if (!ModelState.IsValidField("currentPassword")) { <text> class="error-label" </text> }>Bieżące userPassword</label>
-                            <input type="password" id="currentPassword" name="currentPassword" @Validation.For("currentPassword") />
-                            @Html.ValidationMessage("currentPassword")
-                        </li>
-
-                        <li class="new-password">
-                            <label for="newPassword" @if (!ModelState.IsValidField("newPassword")) { <text> class="error-label" </text> }>Nowe userPassword</label>
-                            <input type="password" id="newPassword" name="newPassword" @Validation.For("newPassword") />
-                            @Html.ValidationMessage("newPassword")
-                        </li>
-                        <li class="confirm-password">
-                            <label for="confirmPassword" @if (!ModelState.IsValidField("confirmPassword")) { <text> class="error-label" </text> }>Potwierdź nowe userPassword</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" @Validation.For("confirmPassword") />
-                            @Html.ValidationMessage("confirmPassword")
-                        </li>
-                    </ol>
-                    <button type="submit" name="action" value="password">Zmień userPassword</button>
+                            <hgroup class="title">
+                                <h1>@title</h1>
+                            </hgroup>
 
 
-                </fieldset>
-            </form>*@
 
-    }
+                            <p>Zalogowano jako <strong>@Session["username"]</strong>.</p>
+
+
+                            <h3>Informacje o użytkowniku:</h3>
+                            <h5>ID: </h5>@POST.getUser("id", Session["username"].ToString());
+                            <h5>NAZWA UŻYTKOWNIKA: </h5>@POST.getUser("username", Session["username"].ToString());
+                            <h5>STAN KONTA: </h5>@POST.getUser("balance", Session["username"].ToString());
+
+
+
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <h3>Usuń użytkownika:</h3>
+                                    @AntiForgery.GetHtml()
+                                    <label for="deleteUser" class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-offset-2 col-sm-4 col-sm-offset-6">
+                                        <button type="submit" class="btn btn-default" onclick="return pokaz_confirm()" name="action" value="delete">Kliknij aby siebie usunąć</button>
+                                    </div>
+
+
+                                </div>
+                            </form>
+
+
+
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <h3>Zmień stan konta:</h3>
+                                    @AntiForgery.GetHtml()
+                                    <label for="modifyUserBalance" class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-offset-2 col-sm-4 col-sm-offset-6">
+                                        <input type="number" class="form-control text-center" placeholder="Wprowadź kwotę" id="nowaKwota" name="nowaKwota" value="@nowaKwota" @Validation.For("nowaKwota") />
+                                        <p class="error">@Html.ValidationMessage("nowaKwota")</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+                                        <button type="submit" class="btn btn-default" name="action" value="stanKonta">Doładuj konto :D</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        }
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
 }
+
