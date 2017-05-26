@@ -1,0 +1,501 @@
+html {
+    background: linear-gradient(black, transparent), url(images/bg.jpg) no-repeat center center fixed;
+    min-height: 100%;
+}
+html, body {
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+#top {
+    width: 1130px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#TRESC {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: 988px;
+    height: 335.5px;
+    border-radius: 10px;
+	background-color: rgba(59, 108, 52, 0.9);
+}   
+
+.blokuj{
+    -moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
+	background:-moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-webkit-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-o-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-ms-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#768d87', endColorstr='#6c7c7c',GradientType=0);
+	background-color:#768d87;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 60px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+    margin: 5px;
+}
+.blokuj:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
+	background:-moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
+	background-color:#6c7c7c;
+}
+.blokuj:active {
+	position:relative;
+	top:1px;
+}
+
+.blokuj:disabled {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #768d87));
+	background:-moz-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:-webkit-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:-o-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:-ms-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:linear-gradient(to bottom, #000000 5%, #768d87 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#768d87',GradientType=0);
+	background-color:#000000;
+}
+
+.BTN {
+	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background-color:#768d87;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:15px 62px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+}
+.BTN:hover {
+	background-color:#6c7c7c;
+}
+.BTN:active {
+	position:relative;
+	top:1px;
+}
+.BTN:disabled {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #768d87));
+	background:-moz-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:-webkit-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:-o-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:-ms-linear-gradient(top, #000000 5%, #768d87 100%);
+	background:linear-gradient(to bottom, #000000 5%, #768d87 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#768d87',GradientType=0);
+	background-color:#000000;
+}
+
+
+#wypisz {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    background: rgba(59, 108, 52, 0.9);
+    border-radius: 20px;
+    width: 675px;
+    height: auto;
+    
+}
+
+#plus{
+    padding: 15px;
+    margin: 5px;
+}
+#minus{
+    float: left;
+    padding: 15px;
+    margin: 5px;
+}
+#stawka{
+    float: left;
+    padding: 15px;
+    border-radius:5px;
+    background-color: whitesmoke;
+    margin: 5px;
+    color: black;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+}
+
+#przycisk{
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+div #wygrana {
+    width: 988px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    z-index: 2;
+    top: 150px;
+    height: 245px;
+   /* border: 1px solid #004;*/
+   /* background: linear-gradient(black, transparent), url(images/wygrana.jpg) no-repeat;*/
+    border-radius: 20px;
+    display: none;
+}
+
+div #wynik{
+    background: rgba(21, 54, 129, 0.93);
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 50px;
+    width: 300px;
+    height: 100px;
+    padding: 30px;
+    color:#ededed;
+    text-align: center;
+    font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+}
+
+#gramBTN{
+    margin-top: 25px;
+}
+
+
+
+/*KARTY*/
+
+.flip-card {
+  margin: 5px;  
+  width: 187.5px;
+  height: 270px;
+  border-radius: 0px;
+  position: relative;
+  perspective: 400px;
+  display: inline-block;
+}
+
+.flip-card::before,
+.flip-card::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #ffffff;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: 0.6s transform linear;
+  backface-visibility: hidden;
+}
+
+.flip-card::after {
+  /*background-image: 
+    repeating-linear-gradient(
+      -45deg,
+      #7b9a79,
+      #7b9a79 25px,
+      #000000 25px,
+      #000000 30px
+    );
+    */
+    background: url(images/bs3.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+}
+
+.flip-card::before{
+    background: url(images/ace_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotateY(180deg);
+}
+
+#kier2::before{
+    background: url(images/2_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier3::before{
+    background: url(images/3_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier4::before{
+    background: url(images/4_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier5::before{
+    background: url(images/5_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier6::before{
+    background: url(images/6_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier7::before{
+    background: url(images/7_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier8::before{
+    background: url(images/8_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier9::before{
+    background: url(images/9_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kier10::before{
+    background: url(images/10_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kierJ::before{
+    background: url(images/jack_of_hearts2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kierQ::before{
+    background: url(images/queen_of_hearts2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kierK::before{
+    background: url(images/king_of_hearts2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#kierA::before{
+    background: url(images/ace_of_hearts.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#karo2::before{
+    background: url(images/2_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo3::before{
+    background: url(images/3_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo4::before{
+    background: url(images/4_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo5::before{
+    background: url(images/5_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo6::before{
+    background: url(images/6_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo7::before{
+    background: url(images/7_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo8::before{
+    background: url(images/8_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo9::before{
+    background: url(images/9_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karo10::before{
+    background: url(images/10_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karoJ::before{
+    background: url(images/jack_of_diamonds2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karoQ::before{
+    background: url(images/queen_of_diamonds2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karoK::before{
+    background: url(images/king_of_diamonds2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#karoA::before{
+    background: url(images/ace_of_diamonds.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl2::before{
+    background: url(images/2_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl3::before{
+    background: url(images/3_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl4::before{
+    background: url(images/4_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl5::before{
+    background: url(images/5_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl6::before{
+    background: url(images/6_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl7::before{
+    background: url(images/7_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl8::before{
+    background: url(images/8_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl9::before{
+    background: url(images/9_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#trefl10::before{
+    background: url(images/10_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#treflJ::before{
+    background: url(images/jack_of_clubs2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#treflQ::before{
+    background: url(images/queen_of_clubs2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#treflK::before{
+    background: url(images/king_of_clubs2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#treflA::before{
+    background: url(images/ace_of_clubs.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik2::before{
+    background: url(images/2_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik3::before{
+    background: url(images/3_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik4::before{
+    background: url(images/4_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik5::before{
+    background: url(images/5_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik6::before{
+    background: url(images/6_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik7::before{
+    background: url(images/7_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik8::before{
+    background: url(images/8_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik9::before{
+    background: url(images/9_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pik10::before{
+    background: url(images/10_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pikJ::before{
+    background: url(images/jack_of_spades2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pikQ::before{
+    background: url(images/queen_of_spades2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pikK::before{
+    background: url(images/king_of_spades2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pikA::before{
+    background: url(images/ace_of_spades.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
