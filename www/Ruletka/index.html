@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+body {background-color: green;}
+h1   {color: blue;}
+p    {color: black;}
+
+
+div img {
+	width=400px;
+    -webkit-transform: rotate(0deg);
+    -webkit-transition: -webkit-transform 2s ease-out;
+}
+
+input {
+ postion:fixed;
+ display: block; 
+ top: 0px;
+}
+
+input[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+</style>
+</head>
+<body>
+
+
+
+<div id="znacznik" style="text-align:center"><img width="100" height="100" src="http://www.clipartkid.com/images/27/download-public-domain-ihtHTQ-clipart.png" /></div>
+<div id="obrazek" style="text-align:center"><img width="400" height="400" src="http://upload.wikimedia.org/wikipedia/commons/7/7d/European_roulette_wheel.svg" /></div>
+<p>Wcisnij guziora aby jechac.
+</p>
+<input id="clickMe" type="button" value="Zakrec" onclick="rotate();" />
+
+<form>
+    <label for="choice">Wybor</label>
+    <input type="number" id="choice" name="wybor" placeholder="Nie potwierdzaj enterem :D">
+<div id="stol" style="text-align:center"><img width="760" height="381" src="http://datagenetics.com/blog/july12015/table.jpg" /></div>
+
+
+</body>
+</html>
+
+
+<script>
+rotacja = 0; // Wartosc rotacji
+wybor = 0; //Na co stawia gracz
+ilosc = 0; //Ilosc Funbucksow ktora stawia gracz, jezeli woogole
+rezultat = 0;
+function rotate(){
+	//Wyslij co gracz postawil
+	//
+	//Pobierz wartosc rotacji(ew co ma wypasc w ruletce) Mozna ew. losowac lokalnie ale wtedy mozliwosc oszukiwania jest dziecinnie prosta
+	//W przypadku otrzymywania tylko wyniku nalezy tez wynik przerobic na wartosc rotacji dla kola+x*360 gdzie x=losowa calkowita (fejkowanie losowania)
+	//0=0	32=10 15=19 19=29 4=38 .....
+	wybor = document.getElementById("choice").value;
+	
+	console.log("wybor "+wybor);
+
+	wartosc = Math.floor(Math.random() * 1292) + 1;  //wartosc rotacji
+	angle = wartosc + rotacja + "deg";	
+	document.getElementById("obrazek").style.webkitTransition = '-webkit-transform 2s ease-out';
+	document.getElementById("obrazek").style.webkitTransform = 'rotate('+angle+')'; //Rotacja obrazka kola
+	//console.log("Wykonuje rotacje");//deb
+	rotacja=rotacja+wartosc;
+	//console.log(rotacja);//deb
+	wynik();
+	
+}
+
+function wynik(){
+	rot = rotacja; //Ta wartosc powinna byc brana z serwera //jezeli serwer zwraca wylosowana liczbe to potrzebna konwersja jak up
+	console.log("rotacja wyniki to"+rot);
+	while (rot>360)
+	{
+		console.log("w petli");
+		rot=rot-360;
+	}
+	//Kazde pole ma pewna wartosc rotacji na kole, kat kazdego z pol ma ok ~9,87 wiec aby uzyskac jakies pole nalezy sprawic aby kolo zakrecilo sie o odpowiedni kat
+	console.log("rotacja ="+rot);
+	if (rot>356 || rot<4) // Pole 0 
+	{
+		rezultat = 0;
+		//Efekty losowania zera
+	}
+	if (rot>=347 && rot<356) // Pole 32
+	{
+		rezultat = 32;
+		console.log("Wylosowane"+rezultat);
+	}
+	
+	//itd...
+	//W przypadku 
+	
+	if (rezultat == wybor)
+	{
+		wygrana();
+	}
+	else
+	{
+		przegrana();
+	}
+
+}
+
+function wygrana(){
+	console.log("No Wygrales");
+	//Jakies opracowanie dla wygranej
+	//zysk funbucksów itd.
+}
+function przegrana(){
+	console.log("Ależ to ****** zjebał.heh.");
+	//Jakies opracowanie dla przegranej
+	//strata funbucksów
+	//może jakiś irytujący dźwięk
+	
+}
+
+
+
+</script>
