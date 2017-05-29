@@ -34,6 +34,7 @@
             POST.autoryzowany = false;
             //rozpoczęcie sesji
             Session["username"] = username;
+            Session["passwordAPI"] = "OstryZBaraninaNaC13nk1m!";
             //przekierowanie na stronę główną
             Response.AddHeader("REFRESH", "2;URL=../");
         }
@@ -64,7 +65,7 @@
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label"></label>
                             <div class="col-sm-offset-2 col-sm-4 col-sm-offset-6">
-                                <input type="text" id="username" name="username" class="form-control text-center" placeholder="Username" value="@username" @Validation.For("username")/>
+                                <input type="text" id="username" name="username" class="form-control text-center"  placeholder="Username" value="@username" @Validation.For("username")/>
                             <p class="error">@Html.ValidationMessage("username")</p>
                             </div>
                         </div>

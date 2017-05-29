@@ -6,12 +6,12 @@
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: linear-gradient(black, transparent), url('../Images/bg.jpg') no-repeat center center fixed;
+    background: linear-gradient(black, transparent) no-repeat center center fixed, url('../Images/bg.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    color:white;
+    color: white;
 }
 
 h1,
@@ -28,7 +28,7 @@ h6 {
 }
 
 p {
-    font-size: 1.25em;
+    font-size: 0.9em;
     line-height: 1.6;
     color: #fff;
 }
@@ -115,7 +115,7 @@ footer {
 
 footer p {
     margin: 0;
-    padding: 50px 0;
+    padding: 10px 0;
 }
 
 @media screen and (min-width:768px) {

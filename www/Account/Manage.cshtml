@@ -9,6 +9,7 @@
             return confirm("Czy liczysz się z konsekwencjami ucieczki z kasyna?");
         }
     </script>
+
 }
 
 @{
@@ -81,6 +82,11 @@
                             <h5>NAZWA UŻYTKOWNIKA: </h5>@POST.getUser("username", Session["username"].ToString());
                             <h5>STAN KONTA: </h5>@POST.getUser("balance", Session["username"].ToString());
 
+                            
+                                    
+                        
+
+
 
 
                             <form class="form-horizontal" method="post">
@@ -91,7 +97,6 @@
                                     <div class="col-sm-offset-2 col-sm-4 col-sm-offset-6">
                                         <button type="submit" class="btn btn-default" onclick="return pokaz_confirm()" name="action" value="delete">Kliknij aby siebie usunąć</button>
                                     </div>
-
 
                                 </div>
                             </form>
