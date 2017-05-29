@@ -1,6 +1,3 @@
 [submodule "kasynobackend"]
 	path = kasynobackend
 	url = https://github.com/wygoda/kasynobackend.git
-[submodule "www-submodule"]
-	path = www-submodule
-	url = C:/Users/fm/Desktop/www-submodule
