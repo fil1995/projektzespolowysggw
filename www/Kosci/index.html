@@ -59,14 +59,19 @@
 				var Kosc2_val = ktoryZaznaczony2();
 				var k1 = Math.floor(Math.random()*6)+1;
 				var k2 = Math.floor(Math.random()*6)+1;
-				kosc1.innerHTML = k1;
-				kosc2.innerHTML = k2;
-				if(k1 == Kosc1_val && k2 == Kosc2_val){
-					status.innerHTML = "Wygrałeś";
-				}else if(k1 == Kosc2_val && k2 == Kosc1_val){
-					status.innerHTML = "Wygrałeś";
+				
+				if( Kosc1_val == undefined || Kosc2_val == undefined){
+					alert('Wybierz ilość oczek');
 				}else{
-					status.innerHTML = "Przegrałeś";
+					kosc1.innerHTML = k1;
+					kosc2.innerHTML = k2;
+					if(k1 == Kosc1_val && k2 == Kosc2_val){
+						status.innerHTML = "Wygrałeś";
+					}else if(k1 == Kosc2_val && k2 == Kosc1_val){
+						status.innerHTML = "Wygrałeś";
+					}else{
+						status.innerHTML = "Przegrałeś";
+					}
 				}
 			}
 		</script>
