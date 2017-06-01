@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
 		<style type="text/css">
 			div.kosc{
 				float:left;
@@ -10,6 +11,11 @@
 				padding:10px;
 				text-align:center;
 				margin:5px;
+			}
+			body{
+				background-size: scale;
+				background-repeat:no-repeat;
+				background-position:center;
 			}
 		</style>
 		<script>
@@ -65,10 +71,10 @@
 			}
 		</script>
 	</head>
-	<body>
+	<body background="tloKosci.tiff">
 		<div id="kosc1" class="kosc">0</div>
 		<div id="kosc2" class="kosc">0</div>
-		<table border="1">
+		<table border="1" style="background-color:#f5f5f5;">
             <tr>
                 <td>Liczba oczek</td>
                 <td>1</td>
@@ -100,6 +106,6 @@
 				<input type="button" onclick="rzucKoscmi()" value="Rzuć kośćmi"/>
 			</form>
         </table>
-		<h2 id="status" style="clear:left;"h2>
+		<h2 id="status" style="clear:left;color:#f5f5f5;"h2>
 	</body>
 </html>
