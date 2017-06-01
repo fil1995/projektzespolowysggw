@@ -1,0 +1,81 @@
+.container {
+  width: 201px;
+  height: 201px;
+  float: left;
+  perspective: 1000px;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: 0.5s transform linear;
+}
+
+.cube > div {
+  width: 201px;
+  height: 201px;
+  border: 2px solid black;
+  box-sizing: border-box;
+  position: absolute;
+  
+  box-shadow: 1px 2px 5px 1px #696f9f inset;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cube .front {
+  transform: rotateX(0deg) translateZ(100px);
+  background-image: url('kosc1.png');
+}
+
+.cube .back {
+  transform: rotateX(180deg) translateZ(100px);
+  background-image: url('kosc6.png');
+}
+
+.cube .right {
+  transform: rotateY(90deg) translateZ(100px);
+  background-image: url('kosc4.png');
+}
+
+.cube .left {
+  transform: rotateY(-90deg) translateZ(100px);
+  background-image: url('kosc3.png');
+}
+
+.cube .top {
+  transform: rotateX(90deg) translateZ(100px);
+  background-image: url('kosc5.png');
+}
+
+.cube .bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+  background-image: url('kosc2.png');
+}
+
+.cube.show-front {
+  transform: rotateX(0deg);
+}
+
+.cube.show-back {
+  transform: rotateX(-180deg);
+}
+
+.cube.show-right {
+  transform: rotateY(-90deg);
+}
+
+.cube.show-left {
+  transform: rotateY(90deg);
+}
+
+.cube.show-top {
+  transform: rotateX(-90deg);
+}
+
+.cube.show-bottom {
+  transform: rotateX(90deg);
+}
