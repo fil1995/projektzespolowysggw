@@ -2,16 +2,12 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<style type="text/css">
-			div.kosc{
-				float:left;
-				width:32px;
-				background:#f5f5f5;
-				border:#999 1px solid;
-				padding:10px;
-				text-align:center;
-				margin:5px;
-			}
+		<meta name="viewport" content="width=device-width">
+		<title>Kości</title>
+		<link rel="stylesheet" href="../base.css">
+		<link rel="stylesheet" href="base.css">
+		<link rel="stylesheet" href="style.css">
+		<style type="text/css">			
 			body{
 				background-size: scale;
 				background-repeat:no-repeat;
@@ -51,6 +47,36 @@
 				}
 			}
 			
+			function jakObrocicKosci(k1,k2){
+				if(k1 == 1){
+					document.getElementById("kosc1").className = "cube show-front";
+				}else if(k1 == 2){
+					document.getElementById("kosc1").className = "cube show-bottom";
+				}else if(k1 == 3){
+					document.getElementById("kosc1").className = "cube show-left";
+				}else if(k1 == 4){
+					document.getElementById("kosc1").className = "cube show-right";
+				}else if(k1 == 5){
+					document.getElementById("kosc1").className = "cube show-top";
+				}else if(k1 == 6){
+					document.getElementById("kosc1").className = "cube show-back";
+				}
+				
+				if(k2 == 1){
+					document.getElementById("kosc2").className = "cube show-front";
+				}else if(k2 == 2){
+					document.getElementById("kosc2").className = "cube show-bottom";
+				}else if(k2 == 3){
+					document.getElementById("kosc2").className = "cube show-left";
+				}else if(k2 == 4){
+					document.getElementById("kosc2").className = "cube show-right";
+				}else if(k2 == 5){
+					document.getElementById("kosc2").className = "cube show-top";
+				}else if(k2 == 6){
+					document.getElementById("kosc2").className = "cube show-back";
+				}
+			}
+			
 			function rzucKoscmi(){
 				var kosc1 = document.getElementById("kosc1");
 				var kosc2 = document.getElementById("kosc2");
@@ -61,33 +87,51 @@
 				var k2 = Math.floor(Math.random()*6)+1;
 				
 				if( Kosc1_val == undefined || Kosc2_val == undefined){
-					alert('Wybierz ilość oczek');
+					alert('Wybierz liczbę oczek');
 				}else{
-					kosc1.innerHTML = k1;
-					kosc2.innerHTML = k2;
+					jakObrocicKosci(k1,k2);
 					if(k1 == Kosc1_val && k2 == Kosc2_val){
 						status.innerHTML = "Wygrałeś";
 					}else if(k1 == Kosc2_val && k2 == Kosc1_val){
 						status.innerHTML = "Wygrałeś";
 					}else{
 						status.innerHTML = "Przegrałeś";
+						document.getElementById("cube1").className = "cube show-left";
 					}
 				}
 			}
 		</script>
 	</head>
 	<body background="tloKosci.tiff">
-		<div id="kosc1" class="kosc">0</div>
-		<div id="kosc2" class="kosc">0</div>
+		<div class="container">
+			<div id="kosc1" class="cube">
+				<div class="front"></div>
+				<div class="back"></div>
+				<div class="right"></div>
+				<div class="left"></div>
+				<div class="top"></div>
+				<div class="bottom"></div>
+			</div>
+		</div>
+		<div class="container">
+			<div id="kosc2" class="cube">
+				<div class="front"></div>
+				<div class="back"></div>
+				<div class="right"></div>
+				<div class="left"></div>
+				<div class="top"></div>
+				<div class="bottom"></div>
+			</div>
+		</div>
 		<table border="1" style="background-color:#f5f5f5;">
             <tr>
                 <td>Liczba oczek</td>
-                <td>1</td>
-                <td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
+                <td align="center">1</td>
+                <td align="center">2</td>
+				<td align="center">3</td>
+				<td align="center">4</td>
+				<td align="center">5</td>
+				<td align="center">6</td>
             </tr>
             <form action="submission.html" method="get" onsubmit="return ">
 				<tr>
@@ -111,6 +155,6 @@
 				<input type="button" onclick="rzucKoscmi()" value="Rzuć kośćmi"/>
 			</form>
         </table>
-		<h2 id="status" style="clear:left;color:#f5f5f5;"h2>
+		<h2 id="status" style="color:#f5f5f5;" h2>
 	</body>
 </html>
