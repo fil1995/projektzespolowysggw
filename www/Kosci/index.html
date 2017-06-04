@@ -4,9 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
 		<title>Kości</title>
-		<link rel="stylesheet" href="../base.css">
 		<link rel="stylesheet" href="base.css">
-		<link rel="stylesheet" href="style.css">
+		<!-- <link rel="stylesheet" href="style.css"> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 		<style type="text/css">			
@@ -19,8 +18,12 @@
 		<script>
 		var k1 =1;
 		var k2 =1;
-		
-		
+		var kosc1 = document.getElementById("kosc1");
+		var kosc2 = document.getElementById("kosc2");
+		var status = document.getElementById("status");
+		var Kosc1_val = ktoryZaznaczony1();
+		var Kosc2_val = ktoryZaznaczony2();	
+
 		
 			function ktoryZaznaczony1(){
 				if(document.getElementById("wartoscKosc11").checked == true){
@@ -86,11 +89,9 @@
 			
 			function rzucKoscmi(){
 				
-				var kosc1 = document.getElementById("kosc1");
-				var kosc2 = document.getElementById("kosc2");
-				var status = document.getElementById("status");
-				var Kosc1_val = ktoryZaznaczony1();
-				var Kosc2_val = ktoryZaznaczony2();
+
+				Kosc1_val = ktoryZaznaczony1();
+				Kosc2_val = ktoryZaznaczony2();
 				//var k1 = Math.floor(Math.random()*6)+1;
 				//var k2 = Math.floor(Math.random()*6)+1;
 				
@@ -98,14 +99,7 @@
 					alert('Wybierz liczbę oczek');
 				}else{
 					pobierzDane ();
-					jakObrocicKosci(k1,k2);
-					if(k1 == Kosc1_val && k2 == Kosc2_val){
-						status.innerHTML = "Wygrałeś";
-					}else if(k1 == Kosc2_val && k2 == Kosc1_val){
-						status.innerHTML = "Wygrałeś";
-					}else{
-						status.innerHTML = "Przegrałeś";
-					}
+					
 				}
 			}
 			
@@ -122,14 +116,22 @@ function pobierzDane (Kosc1,Kosc2) {
     type : 'POST',
     dataType : 'json',
     success : function(data) {
-	var zwroc = "";
-        jQuery.each(data, function(i, ob) {
-            console.log(i, ob); 
-			zwroc+=ob;
-			});
-		// sprawdzic, czy dobrze !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		k1= data[0];
-		k2= data[1];
+
+		k1 = data["throws"][0];
+		k2 = data["throws"][1];
+		console.log("wypadło: "+k1 + " oraz: "+k2);
+		var status = document.getElementById("status");
+		
+		jakObrocicKosci(k1,k2);
+		if(k1 == Kosc1_val && k2 == Kosc2_val){
+			status.innerHTML = "Wygrałeś";
+		}else if(k1 == Kosc2_val && k2 == Kosc1_val){
+			status.innerHTML = "Wygrałeś";
+		}else{
+				console.log("Przegrales");
+
+			status.innerHTML = "Przegrałeś";
+		}
 		
     }
     });
@@ -195,6 +197,7 @@ function pobierzDane (Kosc1,Kosc2) {
 				</form>
 			</table>
 			<h2 id="status" style="color:#f5f5f5;"> </h2>
+			
 		</div>
 	</body>
 </html>
