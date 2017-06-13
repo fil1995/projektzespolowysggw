@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="main.css">
         <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body onload="pobierz_grafike();">
         <div id="top">
             <button id="wypisz2" type="button">ZAMIEŃ</button>
             <div id="TRESC">
@@ -18,7 +18,7 @@
                 <button id="blokuj5" class="blokuj" type="button" disabled>BLOKUJ</button>
                 <div id="wygrana">
                     <div id="wynik">
-                        Przegrałeś cały hajs leszczu :)
+                        <div id="wynik_tekst">Przegrałeś cały hajs leszczu :)</div>
                         <button id="gramBTN" class="BTN" type="button">GRAM DALEJ</button>
                     </div>
                     
@@ -32,7 +32,7 @@
                 <button id="przycisk4" class="BTN" type="button" disabled>ZAMIEŃ</button>
             </div>
             
-            
+            <div id="loading" style="display: none;" class="flip-card"></div> 
         </div>
         <script src="javascp.js"></script>
     </body>    

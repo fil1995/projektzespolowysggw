@@ -9,15 +9,19 @@ var block5Btn = document.querySelector("#blokuj5");
 var plusBtn = document.querySelector("#plus");
 var minusBtn = document.querySelector("#minus");
 var gramBtn = document.querySelector("#gramBTN");
+var loading = document.querySelector("#loading");
 var ourTable = ['treflA', 'trefl2', 'trefl3', 'trefl4', 'trefl5', 'trefl6', 'trefl7', 'trefl8', 'trefl9', 'trefl10', 'treflJ', 'treflQ', 'treflK', 'pikA', 'pik2', 'pik3', 'pik4', 'pik5', 'pik6', 'pik7', 'pik8', 'pik9', 'pik10', 'pikJ', 'pikQ', 'pikK', 'kierA', 'kier2', 'kier3', 'kier4', 'kier5', 'kier6', 'kier7', 'kier8', 'kier9', 'kier10', 'kierJ', 'kierQ', 'kierK', 'karoA', 'karo2', 'karo3', 'karo4', 'karo5', 'karo6', 'karo7', 'karo8', 'karo9', 'karo10', 'karoJ', 'karoQ', 'karoK'];
 //var cards = [1, 2, 35, 23, 42, 21, 34, 15, 12, 20];
-var cards = [];
-var cards1 = [];
-var cards2 = [];
+var cards = [];  //karty z API
+var cards1 = []; //Pierwsze rozdanie
+var cards2 = []; //Drugie rozdanie
 var il_zmian = 0;
 var styleElem = document.head.appendChild(document.createElement("style"));
 var i = 0;
 var karta;
+var amount=0;
+var bet;
+var Scards="";
 
 //FUNKCJE
 //Funkcja odkryj() - odkrywa karty
@@ -46,20 +50,32 @@ chc3Btn.addEventListener("click", function () {
         for (i = 0; i < 5; i = i + 1) {
             if (i >= il_zmian) { cards2[i] = cards.shift(); }
             document.getElementById(ourTable[cards1[i] - 1]).id = ourTable[cards2[i] - 1];
+            Scards += cards2[i];
+            if (i < 4) { Scards += ", "; }
         }
     }, 500);
     setTimeout(function () {odkryj(); }, 1000);
     setTimeout(function () {
         //sprawdzam wygraną za pomocą JSON
-        document.getElementById("wygrana").style.display = "inline";
+        sprawdz(bet, Scards);
+        console.log(Scards);
+        console.log(cards2);
+        setTimeout(function () {
+            document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
+            document.getElementById("wygrana").style.display = "inline";
+        }, 500);
     }, 2000);  
 }, false);
 
 //funkcja anonimowa obługująca przycisk "ROZDAJ" o id="przycisk1" - pobiera i wyświetla 5 kart z talii
 addBtn.addEventListener("click", function () {
     "use strict";
-    pobierz();
-    setTimeout(function () {
+   // pobierz();
+	do
+	{
+		setTimeout(function () {console.log("czekaj"); }, 1000);
+	} while (cards[9] <= 0)
+    //setTimeout(function () {
         block1Btn.disabled = false;
         block2Btn.disabled = false;
         block3Btn.disabled = false;
@@ -69,6 +85,7 @@ addBtn.addEventListener("click", function () {
         minusBtn.disabled = true;
         addBtn.disabled = true;
         chc3Btn.disabled = false;
+        bet = Number(stawka.innerHTML);
 
         var div = document.querySelector("#TRESC");
         for (i = 0; i < 5; i = i + 1) {
@@ -79,7 +96,7 @@ addBtn.addEventListener("click", function () {
             div.appendChild(karta);
         }
         setTimeout(function () {odkryj(); }, 500); 
-    }, 300);
+   // }, 300);
 }, false);
 
 plusBtn.addEventListener("click", function () {
@@ -111,7 +128,15 @@ gramBtn.addEventListener("click", function () {
     document.getElementById("wygrana").style.display = "none";
     $('div.flip-card').remove();
     zakryj();
+	pobierz();
 }, false);
+
+function pobierz_grafike () {
+    for (i = 0; i < ourTable.length; i = i + 1) {
+        loading.id = ourTable[i];
+    }
+	pobierz();
+}
 
 
 //TEST
@@ -189,6 +214,53 @@ function pobierz () {
     error : function(xhr, status) {
         "use strict";
        //alert('Przepraszamy, wystąpił problem!');
+    },
+  
+    // kod, który ma zostać wykonany bez względu na to, czy żądanie zostało zakończone powodzeniem, czy nie
+    complete : function(xhr, status) {
+        "use strict";
+        //alert('Żądanie wykonane!');
+    }
+    });
+}
+
+function sprawdz (bet, Scard) {
+    $.ajax({
+    // adres URL żądania
+    url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
+  
+    // dane, które mają zostać wysłane
+    // (zostaną przekształcone na łańcuch zapytania)
+    data : {
+        //password : "OstryZBaraninaNaC13nk1m!",
+        function : "poker",
+        betamount: bet,
+        counter: "1",
+        cards: Scard,
+        username: "test23",
+        userPassword: "testpass"
+    },
+  
+    // określamy typ żądania — POST lub GET
+    type : 'POST',
+  
+    // typ danych, jaki chcemy otrzymać
+    dataType : 'json',
+  
+    //kod, który ma zostać wykonany jeśli żądanie się powiedzie;
+    // odpowiedź jest przekazywana do funkcji
+    success : function(data) {
+        jQuery.each(data, function(i, ob) {
+            console.log(i, ob); });
+        amount = data.amount;
+    },
+  
+    // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
+    // nieprzetworzone żądanie oraz kody stanu są
+    // przekazywane do funkcji
+    error : function(xhr, status) {
+        "use strict";
+       alert('Przepraszamy, wystąpił problem!');
     },
   
     // kod, który ma zostać wykonany bez względu na to, czy żądanie zostało zakończone powodzeniem, czy nie
