@@ -16,6 +16,15 @@
 			}
 		</style>
 		<script>
+		
+		/**
+			Zmienne odpowiedzialne, za logowanie, dla Michała:
+		*/
+		var USER = "test23";
+		var PASS = "testpass";
+		
+		
+		
 			var k1 =1;
 			var k2 =1;
 			var kosc1 = document.getElementById("kosc1");
@@ -128,9 +137,12 @@
 				$.ajax({
 				url : 'http://kasynobackend-wygoda.rhcloud.com/backend/game',
 				data : {
-					password : "OstryZBaraninaNaC13nk1m!",
+					username: USER,
+					userPassword: PASS,
 					function : "dice",
-					diceroll: Kosc1 + Kosc2
+					diceroll: Kosc1 + Kosc2,
+					betamount: stawka.innerHTML,
+					dicebet: Kosc1_val + Kosc2_val // zakład
 				},
 				type : 'POST',
 				dataType : 'json',
@@ -208,12 +220,16 @@
 						<td><input type="radio" name="wartoscK2" value="5" id="wartoscKosc25"></td>
 						<td><input type="radio" name="wartoscK2" value="6" id="wartoscKosc26"></td>
 					</tr>
+					
 					<input type="button" onclick="rzucKoscmi()" value="Rzuć kośćmi"/>
+				<div style="display: inline-flex; margin-left:5px;">
+					<button id="minus" type="button" onclick="zmniejszStawke()" disabled>-</button>
+					<div id="stawka" style="color:#f5f5f5;">1</div>
+					<button id="plus" type="button" onclick="zwiekszStawke()">+</button>
+				</div>
 				</form>
 			</table>
-			<button id="minus" type="button" onclick="zmniejszStawke()" disabled>-</button>
-            <div id="stawka" style="color:#f5f5f5;">1</div>
-            <button id="plus" type="button" onclick="zwiekszStawke()">+</button>
+			
 			<h2 id="status" style="color:#f5f5f5;"> </h2>
 			
 		</div>
