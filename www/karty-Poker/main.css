@@ -1,5 +1,6 @@
 html {
-    background: linear-gradient(black, transparent), url(images/bg.jpg) no-repeat center center fixed;
+    \\background: linear-gradient(black, transparent), url(https://freeshell.de/~fil1995/karty-poker-images/bg.jpg) no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0);
     min-height: 100%;
 }
 html, body {
@@ -7,8 +8,38 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+#pasek{
+    padding: 10px;
+    //width: 100%;
+    background-color: black;
+    color: white;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+    height: 30px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#pasekTekst{
+    width:250px;
+    float: left;
+    margin-top: 4px;
+}
+
+#stanKonta{
+    float: left;
+    padding: 3px;
+    border-radius:5px;
+    background-color: whitesmoke;
+    color: black;
+    min-width: 150px;
+    max-height: 500px;
+    text-align: right;
+}
+
 #top {
-    width: 1130px;
+    //width: 1130px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
@@ -47,7 +78,8 @@ html, body {
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
-	padding:10px 60px;
+	padding:10px 0px;
+    text-align: center;
 	text-decoration:none;
 	text-shadow:0px -1px 0px #2b665e;
     margin: 5px;
@@ -68,7 +100,7 @@ html, body {
 	top:1px;
 }
 
-.blokuj:disabled {
+.blokuj:disabled{
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #768d87));
 	background:-moz-linear-gradient(top, #000000 5%, #768d87 100%);
 	background:-webkit-linear-gradient(top, #000000 5%, #768d87 100%);
@@ -78,6 +110,52 @@ html, body {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#768d87',GradientType=0);
 	background-color:#000000;
 }
+
+.odblokuj {
+	-moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+	box-shadow:inset 0px 1px 0px 0px #cf866c;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+	background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+	background-color:#d0451b;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 0px;
+    text-align: center;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+    margin: 5px;
+	width: 184px;
+}
+.odblokuj:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
+	background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bc3315', endColorstr='#d0451b',GradientType=0);
+	background-color:#bc3315;
+}
+.odblokuj:active {
+	position:relative;
+	top:1px;
+}
+
+
 
 .BTN {
 	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
@@ -164,7 +242,7 @@ div #wygrana {
     top: 150px;
     height: 245px;
    /* border: 1px solid #004;*/
-   /* background: linear-gradient(black, transparent), url(images/wygrana.jpg) no-repeat;*/
+   /* background: linear-gradient(black, transparent), url(https://freeshell.de/~fil1995/karty-poker-imageswygrana.jpg) no-repeat;*/
     border-radius: 20px;
     display: none;
 }
@@ -225,278 +303,277 @@ div #wynik{
       #000000 30px
     );
     */
-    background: url(images/bs3.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-imagesbs3.png);
     background-size: contain;
     background-repeat: no-repeat;
     
 }
 
 .flip-card::before{
-    background: url(images/ace_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier2.png);
     background-size: contain;
     background-repeat: no-repeat;
     transform: rotateY(180deg);
 }
 
 #kier2::before{
-    background: url(images/2_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier2.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier3::before{
-    background: url(images/3_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier3.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier4::before{
-    background: url(images/4_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier4.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier5::before{
-    background: url(images/5_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier5.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier6::before{
-    background: url(images/6_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier6.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier7::before{
-    background: url(images/7_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier7.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier8::before{
-    background: url(images/8_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier8.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier9::before{
-    background: url(images/9_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier9.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kier10::before{
-    background: url(images/10_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kier10.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kierJ::before{
-    background: url(images/jack_of_hearts2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kierJ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kierQ::before{
-    background: url(images/queen_of_hearts2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kierQ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kierK::before{
-    background: url(images/king_of_hearts2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kierK.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #kierA::before{
-    background: url(images/ace_of_hearts.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/kierA.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 #karo2::before{
-    background: url(images/2_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo2.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo3::before{
-    background: url(images/3_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo3.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo4::before{
-    background: url(images/4_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo4.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo5::before{
-    background: url(images/5_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo5.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo6::before{
-    background: url(images/6_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo6.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo7::before{
-    background: url(images/7_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo7.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo8::before{
-    background: url(images/8_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo8.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo9::before{
-    background: url(images/9_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo9.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karo10::before{
-    background: url(images/10_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karo10.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karoJ::before{
-    background: url(images/jack_of_diamonds2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karoJ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karoQ::before{
-    background: url(images/queen_of_diamonds2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karoQ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karoK::before{
-    background: url(images/king_of_diamonds2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karoK.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #karoA::before{
-    background: url(images/ace_of_diamonds.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/karoA.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl2::before{
-    background: url(images/2_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl2.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl3::before{
-    background: url(images/3_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl3.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl4::before{
-    background: url(images/4_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl4.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl5::before{
-    background: url(images/5_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl5.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl6::before{
-    background: url(images/6_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl6.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl7::before{
-    background: url(images/7_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl7.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl8::before{
-    background: url(images/8_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl8.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl9::before{
-    background: url(images/9_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl9.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #trefl10::before{
-    background: url(images/10_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/trefl10.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #treflJ::before{
-    background: url(images/jack_of_clubs2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/treflJ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #treflQ::before{
-    background: url(images/queen_of_clubs2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/treflQ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #treflK::before{
-    background: url(images/king_of_clubs2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/treflJ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #treflA::before{
-    background: url(images/ace_of_clubs.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/treflA.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik2::before{
-    background: url(images/2_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik2.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik3::before{
-    background: url(images/3_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik3.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik4::before{
-    background: url(images/4_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik4.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik5::before{
-    background: url(images/5_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik5.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik6::before{
-    background: url(images/6_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik6.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik7::before{
-    background: url(images/7_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik7.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik8::before{
-    background: url(images/8_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik8.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik9::before{
-    background: url(images/9_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik9.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pik10::before{
-    background: url(images/10_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pik10.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pikJ::before{
-    background: url(images/jack_of_spades2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pikJ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pikQ::before{
-    background: url(images/queen_of_spades2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pikQ.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pikK::before{
-    background: url(images/king_of_spades2.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pikK.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
 #pikA::before{
-    background: url(images/ace_of_spades.png);
+    background: url(https://freeshell.de/~fil1995/karty-poker-images/pikA.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
-

@@ -10,6 +10,7 @@ var plusBtn = document.querySelector("#plus");
 var minusBtn = document.querySelector("#minus");
 var gramBtn = document.querySelector("#gramBTN");
 var loading = document.querySelector("#loading");
+var stanKonta = document.querySelector("#stanKonta");
 var ourTable = ['treflA', 'trefl2', 'trefl3', 'trefl4', 'trefl5', 'trefl6', 'trefl7', 'trefl8', 'trefl9', 'trefl10', 'treflJ', 'treflQ', 'treflK', 'pikA', 'pik2', 'pik3', 'pik4', 'pik5', 'pik6', 'pik7', 'pik8', 'pik9', 'pik10', 'pikJ', 'pikQ', 'pikK', 'kierA', 'kier2', 'kier3', 'kier4', 'kier5', 'kier6', 'kier7', 'kier8', 'kier9', 'kier10', 'kierJ', 'kierQ', 'kierK', 'karoA', 'karo2', 'karo3', 'karo4', 'karo5', 'karo6', 'karo7', 'karo8', 'karo9', 'karo10', 'karoJ', 'karoQ', 'karoK'];
 //var cards = [1, 2, 35, 23, 42, 21, 34, 15, 12, 20];
 var cards = [];  //karty z API
@@ -22,6 +23,10 @@ var karta;
 var amount=0;
 var bet;
 var Scards="";
+var user = "test23";
+var userPass = "testpass";
+var userData = [];
+var blockList = [0, 0 , 0, 0, 0]
 
 //FUNKCJE
 //Funkcja odkryj() - odkrywa karty
@@ -46,6 +51,11 @@ chc3Btn.addEventListener("click", function () {
     block4Btn.disabled = 'true';
     block5Btn.disabled = 'true';
     zakryj();
+    for (i = 0; i < 5; i = i + 1) {
+        if(blockList[i] == 1){
+            cards2.push(cards1[i]);
+        }
+    }
     setTimeout(function () {
         for (i = 0; i < 5; i = i + 1) {
             if (i >= il_zmian) { cards2[i] = cards.shift(); }
@@ -57,14 +67,13 @@ chc3Btn.addEventListener("click", function () {
     setTimeout(function () {odkryj(); }, 1000);
     setTimeout(function () {
         //sprawdzam wygraną za pomocą JSON
-        sprawdz(bet, Scards);
-        console.log(Scards);
-        console.log(cards2);
+        sprawdz(bet, Scards, user, userPass);
         setTimeout(function () {
             document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
-            document.getElementById("wygrana").style.display = "inline";
+            document.getElementById("wygrana").style.display = "inline-table";
+            getUser(user, userPass);
         }, 500);
-    }, 2000);  
+    }, 2000);
 }, false);
 
 //funkcja anonimowa obługująca przycisk "ROZDAJ" o id="przycisk1" - pobiera i wyświetla 5 kart z talii
@@ -125,10 +134,28 @@ gramBtn.addEventListener("click", function () {
     cards2 = [];
     il_zmian = 0;
     i = 0;
+	Scards = "";
+    block1Btn.value = 0;
+    block2Btn.value = 0;
+    block3Btn.value = 0;
+    block4Btn.value = 0;
+    block5Btn.value = 0;
+    block1Btn.innerHTML = "BLOKUJ";
+    block2Btn.innerHTML = "BLOKUJ";
+    block3Btn.innerHTML = "BLOKUJ";
+    block4Btn.innerHTML = "BLOKUJ";
+    block5Btn.innerHTML = "BLOKUJ";
+    block1Btn.className = "blokuj";
+    block2Btn.className = "blokuj";
+    block3Btn.className = "blokuj";
+    block4Btn.className = "blokuj";
+    block5Btn.className = "blokuj";
+    blockList = [0, 0, 0, 0, 0];
     document.getElementById("wygrana").style.display = "none";
     $('div.flip-card').remove();
     zakryj();
 	pobierz();
+    stanKonta.innerHTML=userData[2];
 }, false);
 
 function pobierz_grafike () {
@@ -136,49 +163,97 @@ function pobierz_grafike () {
         loading.id = ourTable[i];
     }
 	pobierz();
+    getUser(user, userPass);
+    setTimeout(function () {stanKonta.innerHTML=userData[2]; }, 500);
 }
 
-
-//TEST
-var wyp = document.getElementById("wypisz2");
-wyp.addEventListener("click", function () {
-    "use strict";
-    cards2.forEach(function (el, i) {
-        document.getElementById("wypisz").innerHTML += ('Miejsce numer ' + i + ': ' + el + "\n");
-    });
-}, false);
-//TEST
 
 //PRZYCISKI BLOKUJ
 block1Btn.addEventListener("click", function () {
     "use strict";
-    cards2.push(cards1[0]);
-    block1Btn.disabled = "true";
-    il_zmian = il_zmian + 1;
+    if(block1Btn.value == 0)
+    {
+        block1Btn.innerHTML = "ODBLOKUJ";
+        il_zmian = il_zmian + 1;
+        blockList[0] = 1;
+        block1Btn.value = il_zmian;
+        block1Btn.className = "odblokuj";
+    }else{
+        block1Btn.value = 0;
+        il_zmian = il_zmian - 1;
+        blockList[0] = 0;
+        block1Btn.innerHTML = "BLOKUJ";
+        block1Btn.className = "blokuj";
+    }
+    
 }, false);
 block2Btn.addEventListener("click", function () {
     "use strict";
-    cards2.push(cards1[1]);
-    block2Btn.disabled = "true";
-    il_zmian = il_zmian + 1;
+    if(block2Btn.value == 0)
+    {
+        block2Btn.innerHTML = "ODBLOKUJ";
+        il_zmian = il_zmian + 1;
+        block2Btn.value = il_zmian;
+        block2Btn.className = "odblokuj";
+        blockList[1] = 1;
+    }else{
+        block2Btn.value = 0;
+        il_zmian = il_zmian - 1;
+        block2Btn.innerHTML = "BLOKUJ";
+        block2Btn.className = "blokuj";
+        blockList[1] = 0;
+    }
 }, false);
 block3Btn.addEventListener("click", function () {
     "use strict";
-    cards2.push(cards1[2]);
-    block3Btn.disabled = "true";
-    il_zmian = il_zmian + 1;
+    if(block3Btn.value == 0)
+    {   
+        block3Btn.innerHTML = "ODBLOKUJ";
+        il_zmian = il_zmian + 1;
+        block3Btn.value = il_zmian;
+        block3Btn.className = "odblokuj";
+        blockList[2] = 1;
+    }else{
+        block3Btn.value = 0;
+        il_zmian = il_zmian - 1;
+        block3Btn.innerHTML = "BLOKUJ";
+        block3Btn.className = "blokuj";
+        blockList[2] = 0;
+    }
 }, false);
 block4Btn.addEventListener("click", function () {
     "use strict";
-    cards2.push(cards1[3]);
-    block4Btn.disabled = "true";
-    il_zmian = il_zmian + 1;
+    if(block4Btn.value == 0)
+    {    
+        block4Btn.innerHTML = "ODBLOKUJ";
+        il_zmian = il_zmian + 1;
+        block4Btn.value = il_zmian;
+        block4Btn.className = "odblokuj";
+        blockList[3] = 1;
+    }else{
+        block4Btn.value = 0;
+        il_zmian = il_zmian - 1;
+        block4Btn.innerHTML = "BLOKUJ";
+        block4Btn.className = "blokuj";
+        blockList[3] = 0;
+    }
 }, false);
 block5Btn.addEventListener("click", function () {
     "use strict";
-    cards2.push(cards1[4]);
-    block5Btn.disabled = "true";
-    il_zmian = il_zmian + 1;
+    if(block5Btn.value == 0)
+    {    
+        block5Btn.innerHTML = "ODBLOKUJ";
+        il_zmian = il_zmian + 1;
+        block5Btn.value = il_zmian;
+        block5Btn.className = "odblokuj";
+        blockList[4] = 1;
+    }else{
+        block5Btn.value = 0;
+        il_zmian = il_zmian - 1;
+        block5Btn.innerHTML = "BLOKUJ";
+        block5Btn.className = "blokuj";
+        blockList[4] = 0;
+    }
 }, false);
 
 
@@ -203,8 +278,6 @@ function pobierz () {
     //kod, który ma zostać wykonany jeśli żądanie się powiedzie;
     // odpowiedź jest przekazywana do funkcji
     success : function(data) {
-        jQuery.each(data, function(i, ob) {
-            console.log(i, ob); });
         cards = data.cards;
     },
   
@@ -224,7 +297,7 @@ function pobierz () {
     });
 }
 
-function sprawdz (bet, Scard) {
+function sprawdz (bet, Scard, user, userPass) {
     $.ajax({
     // adres URL żądania
     url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
@@ -237,8 +310,8 @@ function sprawdz (bet, Scard) {
         betamount: bet,
         counter: "1",
         cards: Scard,
-        username: "test23",
-        userPassword: "testpass"
+        username: user,
+        userPassword: userPass
     },
   
     // określamy typ żądania — POST lub GET
@@ -250,9 +323,49 @@ function sprawdz (bet, Scard) {
     //kod, który ma zostać wykonany jeśli żądanie się powiedzie;
     // odpowiedź jest przekazywana do funkcji
     success : function(data) {
-        jQuery.each(data, function(i, ob) {
-            console.log(i, ob); });
         amount = data.amount;
+    },
+  
+    // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
+    // nieprzetworzone żądanie oraz kody stanu są
+    // przekazywane do funkcji
+    error : function(xhr, status) {
+        "use strict";
+       alert('Przepraszamy, wystąpił problem!');
+    },
+  
+    // kod, który ma zostać wykonany bez względu na to, czy żądanie zostało zakończone powodzeniem, czy nie
+    complete : function(xhr, status) {
+        "use strict";
+        //alert('Żądanie wykonane!');
+    }
+    });
+}
+
+function getUser (user, userPass) {
+    $.ajax({
+    // adres URL żądania
+    url : 'http://kasynobackend-wygoda.rhcloud.com/backend/user',
+  
+    // dane, które mają zostać wysłane
+    // (zostaną przekształcone na łańcuch zapytania)
+    data : {
+        //password : "OstryZBaraninaNaC13nk1m!",
+        function : "getUser",
+        username: user,
+        userPassword: userPass
+    },
+  
+    // określamy typ żądania — POST lub GET
+    type : 'POST',
+  
+    // typ danych, jaki chcemy otrzymać
+    dataType : 'json',
+  
+    //kod, który ma zostać wykonany jeśli żądanie się powiedzie;
+    // odpowiedź jest przekazywana do funkcji
+    success : function(data) {
+        userData = data.user.split(", ");
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
