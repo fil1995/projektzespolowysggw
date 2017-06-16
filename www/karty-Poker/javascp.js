@@ -366,6 +366,8 @@ function getUser (user, userPass) {
     // odpowiedź jest przekazywana do funkcji
     success : function(data) {
         userData = data.user.split(", ");
+	    stanKonta.innerHTML=userData[2];
+		console.log(userData);
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
@@ -383,3 +385,8 @@ function getUser (user, userPass) {
     }
     });
 }
+
+
+
+
+getUser(user, userPass);
