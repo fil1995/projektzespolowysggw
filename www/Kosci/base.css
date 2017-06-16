@@ -16,11 +16,9 @@
 .cube > div {
   width: 201px;
   height: 201px;
-  border: 2px solid black;
   box-sizing: border-box;
   position: absolute;
   
-  box-shadow: 1px 2px 5px 1px #696f9f inset;
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
