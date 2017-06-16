@@ -1,5 +1,3 @@
-
-
 //ZMIENNE
 var addBtn = document.querySelector("#przycisk");
 var chc3Btn = document.querySelector("#przycisk4");
@@ -25,16 +23,8 @@ var karta;
 var amount=0;
 var bet;
 var Scards="";
-
-// zebranie danych ze strony głównej
-var user = parent.UserName;
-var userPass = parent.UserPassword;
-
-console.log(user);
-console.log(userPass);
-
-
-
+var user = "test23";
+var userPass = "testpass";
 var userData = [];
 var blockList = [0, 0 , 0, 0, 0]
 
@@ -78,11 +68,11 @@ chc3Btn.addEventListener("click", function () {
     setTimeout(function () {
         //sprawdzam wygraną za pomocą JSON
         sprawdz(bet, Scards, user, userPass);
- //       setTimeout(function () {
-   //         document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
-     //       document.getElementById("wygrana").style.display = "inline-table";
-       //     getUser(user, userPass);
-    //    }, 500);
+        setTimeout(function () {
+            document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
+            document.getElementById("wygrana").style.display = "inline-table";
+            getUser(user, userPass);
+        }, 500);
     }, 2000);
 }, false);
 
@@ -165,7 +155,7 @@ gramBtn.addEventListener("click", function () {
     $('div.flip-card').remove();
     zakryj();
 	pobierz();
-    //stanKonta.innerHTML=userData[2];
+    stanKonta.innerHTML=userData[2];
 }, false);
 
 function pobierz_grafike () {
@@ -174,7 +164,7 @@ function pobierz_grafike () {
     }
 	pobierz();
     getUser(user, userPass);
-    //setTimeout(function () { }, 1000);
+    setTimeout(function () {stanKonta.innerHTML=userData[2]; }, 500);
 }
 
 
@@ -334,9 +324,6 @@ function sprawdz (bet, Scard, user, userPass) {
     // odpowiedź jest przekazywana do funkcji
     success : function(data) {
         amount = data.amount;
-        document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
-        document.getElementById("wygrana").style.display = "inline-table";
-        getUser(user, userPass);
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
@@ -379,8 +366,6 @@ function getUser (user, userPass) {
     // odpowiedź jest przekazywana do funkcji
     success : function(data) {
         userData = data.user.split(", ");
-	    stanKonta.innerHTML=userData[2];
-		//console.log(userData);
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
@@ -398,8 +383,3 @@ function getUser (user, userPass) {
     }
     });
 }
-
-
-
-
-//getUser(user, userPass);
