@@ -78,11 +78,11 @@ chc3Btn.addEventListener("click", function () {
     setTimeout(function () {
         //sprawdzam wygraną za pomocą JSON
         sprawdz(bet, Scards, user, userPass);
-        setTimeout(function () {
-            document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
-            document.getElementById("wygrana").style.display = "inline-table";
-            getUser(user, userPass);
-        }, 500);
+ //       setTimeout(function () {
+   //         document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
+     //       document.getElementById("wygrana").style.display = "inline-table";
+       //     getUser(user, userPass);
+    //    }, 500);
     }, 2000);
 }, false);
 
@@ -165,7 +165,7 @@ gramBtn.addEventListener("click", function () {
     $('div.flip-card').remove();
     zakryj();
 	pobierz();
-    stanKonta.innerHTML=userData[2];
+    //stanKonta.innerHTML=userData[2];
 }, false);
 
 function pobierz_grafike () {
@@ -174,7 +174,7 @@ function pobierz_grafike () {
     }
 	pobierz();
     getUser(user, userPass);
-    setTimeout(function () {stanKonta.innerHTML=userData[2]; }, 500);
+    //setTimeout(function () { }, 1000);
 }
 
 
@@ -334,6 +334,9 @@ function sprawdz (bet, Scard, user, userPass) {
     // odpowiedź jest przekazywana do funkcji
     success : function(data) {
         amount = data.amount;
+        document.getElementById("wynik_tekst").innerHTML = "Stan Twojego konta zmienił się o " + amount; 
+        document.getElementById("wygrana").style.display = "inline-table";
+        getUser(user, userPass);
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
@@ -377,7 +380,7 @@ function getUser (user, userPass) {
     success : function(data) {
         userData = data.user.split(", ");
 	    stanKonta.innerHTML=userData[2];
-		console.log(userData);
+		//console.log(userData);
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
@@ -399,4 +402,4 @@ function getUser (user, userPass) {
 
 
 
-getUser(user, userPass);
+//getUser(user, userPass);
