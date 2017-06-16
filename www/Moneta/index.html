@@ -59,18 +59,13 @@
 			
 			function rzucMoneta(){
 				
-				Moneta_val = ktoryZaznaczony();
-				//status.innerHTML = document.getElementById("orzel").value;
-				//document.getElementById("moneta").className = "coin show-back";
-				
+				Moneta_val = ktoryZaznaczony();			
 				
 				if(Moneta_val == undefined){
 					alert('Wybierz orła lub reszkę');
 				}else{
-					pobierzDane ();
-					//jakObrocicMonete(Moneta_val);					
+					pobierzDane ();				
 				}
-				//resetowanie();
 			}
 			
 			function zwiekszStawke(){
@@ -108,7 +103,7 @@
 						moneta1 = data["toss"];
 						console.log("wypadło: "+moneta1);
 						console.log(data);
-		//				var status = document.getElementById("status");
+						//var status = document.getElementById("status");
 						jakObrocicMonete(moneta1);
 						resetowanie();
 					}
