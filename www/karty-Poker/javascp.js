@@ -1,3 +1,5 @@
+
+
 //ZMIENNE
 var addBtn = document.querySelector("#przycisk");
 var chc3Btn = document.querySelector("#przycisk4");
@@ -23,8 +25,16 @@ var karta;
 var amount=0;
 var bet;
 var Scards="";
-var user = '@Session["username"]';
-var userPass = '@Session["userPassword"]';
+
+// zebranie danych ze strony głównej
+var user = parent.UserName;
+var userPass = parent.UserPassword;
+
+console.log(user);
+console.log(userPass);
+
+
+
 var userData = [];
 var blockList = [0, 0 , 0, 0, 0]
 
