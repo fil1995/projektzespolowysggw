@@ -105,10 +105,11 @@
 					type : 'POST',
 					dataType : 'json',
 					success : function(data) {
-						moneta1 = data;
+						moneta1 = data["toss"];
 						console.log("wypadło: "+moneta1);
+						console.log(data);
 		//				var status = document.getElementById("status");
-						jakObrocicMonete(Moneta_val);
+						jakObrocicMonete(moneta1);
 						resetowanie();
 					}
 				});
