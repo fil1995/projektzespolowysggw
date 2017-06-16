@@ -1,0 +1,43 @@
+.container {
+  width: 280px;
+  height: 280px;
+  margin-left: 7px;
+  margin-top: 14px;
+  perspective: 1000px;
+}
+
+.coin {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: 5s transform linear;
+}
+
+.coin > div {
+  width: 280px;
+  height: 280px;
+  position: absolute;
+  
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.coin .front {
+  transform: rotateX(0deg);
+  background-image: url('monetaReszka.bmp');
+}
+
+.coin .back {
+  transform: rotateX(180deg);
+  background-image: url('monetaOrzel.bmp');
+}
+
+.coin.show-front {
+  transform: rotateX(3600deg);
+}
+
+.coin.show-back {
+  transform: rotateX(3780deg);
+}
