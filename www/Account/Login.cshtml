@@ -5,43 +5,50 @@
 }
 
 @{
-    Layout = "~/_SiteLayout.cshtml";
-    Page.Title = "Logowanie";
+        Layout = "~/_SiteLayout.cshtml";
+        Page.Title = "Logowanie";
 
-    // Zainicjuj ogólne zmienne strony
-    var username = "";
-    var userPassword = "";
-    string title = "Logowanie";
+        // Zainicjuj ogólne zmienne strony
+        var username = "";
+        var userPassword = "";
+        string title = "Logowanie";
 
-    // Setup validation
-    Validation.RequireField("username", "Musisz podać swój username.");
-    Validation.RequireField("password", "Musisz określić hasło.");
-    Validation.Add("password",
-        Validator.StringLength(
-            maxLength: Int32.MaxValue,
-            minLength: 6,
-            errorMessage: "Hasło musi mieć co najmniej 6 znaków"));
+        // Setup validation
+        Validation.RequireField("username", "Musisz podać swój username.");
+        Validation.RequireField("password", "Musisz określić hasło.");
+        Validation.Add("password",
+            Validator.StringLength(
+                maxLength: Int32.MaxValue,
+                minLength: 6,
+                errorMessage: "Hasło musi mieć co najmniej 6 znaków"));
 
-    // Jeśli jest to żądanie POST, zweryfikuj dane i przetwórz je
-    if (IsPost)
-    {
-        AntiForgery.Validate();
-        username = Request.Form["username"];
-        userPassword = Request.Form["password"];
-        title = POST.Login(username, userPassword);
-        if (POST.autoryzowany)
+        // Jeśli jest to żądanie POST, zweryfikuj dane i przetwórz je
+        if (IsPost)
         {
-            POST.autoryzowany = false;
-            //rozpoczęcie sesji
-            Session["username"] = username;
-            Session["passwordAPI"] = "OstryZBaraninaNaC13nk1m!";
-            //przekierowanie na stronę główną
-            Response.AddHeader("REFRESH", "2;URL=../");
+            AntiForgery.Validate();
+            username = Request.Form["username"];
+            userPassword = Request.Form["password"];
+            title = POST.Login(username, userPassword);
+            if (POST.autoryzowany)
+            {
+                POST.autoryzowany = false;
+                //rozpoczęcie sesji
+                Session["username"] = username;
+                Session["passwordAPI"] = "OstryZBaraninaNaC13nk1m!";
+                Session["userPassword"] = userPassword;
+
+                if (Session["gra"] == null)
+                {
+                    //przekierowanie na stronę główną
+                    Response.AddHeader("REFRESH", "2;URL=../");
+                }
+                else {
+                    Response.AddHeader("REFRESH", "2;URL=../Games/" + Session["gra"].ToString()); }
+            }
         }
+
+
     }
-
-
-}
 
 
 <div class="container">

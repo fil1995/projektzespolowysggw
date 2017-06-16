@@ -1,0 +1,1 @@
+function resizeIframe(x){try{x.scrolling='no',x.style.height=x.contentWindow.document.body.scrollHeight+30+'px'}catch(x){}}

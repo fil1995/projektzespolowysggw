@@ -23,8 +23,8 @@ var karta;
 var amount=0;
 var bet;
 var Scards="";
-var user = "test23";
-var userPass = "testpass";
+var user = '@Session["username"]';
+var userPass = '@Session["userPassword"]';
 var userData = [];
 var blockList = [0, 0 , 0, 0, 0]
 

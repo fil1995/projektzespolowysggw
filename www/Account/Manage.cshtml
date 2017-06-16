@@ -40,13 +40,16 @@
         if (action == "delete")
         {
             AntiForgery.Validate();
-            title = POST.delete(username);
-            Session["username"] = null;
+            title = POST.delete(username, Session["userPassword"].ToString());
+            Session.Clear();
+            //Session["username"] = null;
+            //Session["username"] = null;
+            //Session["userPassword"] = null;
             Response.AddHeader("REFRESH", "1;URL=../");
         }
         if (action == "stanKonta")
         {
-            title = POST.modifyBalance(username, nowaKwota);
+            title = POST.modifyBalance(username, nowaKwota, Session["userPassword"].ToString());
         }
 
     }
@@ -78,9 +81,9 @@
 
 
                             <h3>Informacje o użytkowniku:</h3>
-                            <h5>ID: </h5>@POST.getUser("id", Session["username"].ToString());
-                            <h5>NAZWA UŻYTKOWNIKA: </h5>@POST.getUser("username", Session["username"].ToString());
-                            <h5>STAN KONTA: </h5>@POST.getUser("balance", Session["username"].ToString());
+                            <h5>ID: </h5>@POST.getUser("id", Session["username"].ToString(), Session["userPassword"].ToString());
+                            <h5>NAZWA UŻYTKOWNIKA: </h5>@POST.getUser("username", Session["username"].ToString(), Session["userPassword"].ToString());
+                            <h5>STAN KONTA: </h5>@POST.getUser("balance", Session["username"].ToString(), Session["userPassword"].ToString());
 
                             
                                     

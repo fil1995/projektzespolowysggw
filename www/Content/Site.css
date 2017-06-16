@@ -197,5 +197,9 @@ footer p {
         clear: both;
     }
 
-
+    .iframe {
+    width: 100%;
+    border: none;
+    
+    }
 }

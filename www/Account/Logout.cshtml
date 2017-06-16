@@ -4,7 +4,8 @@
         // Sprawdź, czy żądanie zostało przesłane przez użytkownika.
         AntiForgery.Validate();
 
-        Session["username"] = null;
+        Session.Clear();
+        //Session["username"] = null;
         
         // Przekieruj z powrotem pod zwrotny adres URL lub do strony głównej.
         var returnUrl = Request.QueryString["ReturnUrl"];
