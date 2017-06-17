@@ -106,11 +106,38 @@
 						console.log(data);
 						//var status = document.getElementById("status");
 						jakObrocicMonete(moneta1);
+						
+						AktualizujStan();
+						
 						resetowanie();
 					}
 				});
 			}	
-		</script>
+
+			function AktualizujStan () {
+				$.ajax({
+					url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
+					data : {
+						username: USER,
+						userPassword: PASS,
+						function : "cointoss",
+						toss: moneta1,
+						betamount: stawka.innerHTML,
+						bet: Moneta_val // zakład
+					},
+					type : 'POST',
+					dataType : 'json',
+					success : function(data) {
+						console.log("Stan konta zmieniony");
+						console.log(data);
+						alert("Stan konta zmienił się o: "+data["amount"]);
+					}
+				});
+			}
+
+
+
+			</script>
 	</head>
 	<body background="tloMoneta.jpg">
 		<div class="container">
