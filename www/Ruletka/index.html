@@ -407,7 +407,7 @@ function aktualizujstan(){
 
 function rotuj(){
 
-	wartosc = wylosuj(rezultat)+(Math.floor(Math.random() * 55))*360+(Math.floor(Math.random() * 3));
+	wartosc = wylosuj(wylosowana)+(Math.floor(Math.random() * 55))*360+(Math.floor(Math.random() * 3));
 	angle = wartosc + "deg";
 	document.getElementById("kolo").style.webkitTransition = '-webkit-transform 2s ease-out';
 	document.getElementById("kolo").style.webkitTransform = 'rotate('+angle+')';
