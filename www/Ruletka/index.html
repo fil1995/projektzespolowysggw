@@ -29,6 +29,7 @@ input {
     text-decoration: none;
     display: inline-block;
     font-size: 1.25em;
+	transition: all 1s ease 0s;
 }
 
 input[type=number] {
@@ -102,7 +103,7 @@ table.formdata input{
 
 <div>
 <input id="clickMe" type="button" class="button" value="Zakrec" onclick="rotate();" style="float: left; position: relative; left: 35%;" />
-<input id="StanKonta" type="button" class="button" value="0" onclick="stankonta();" style="float: left; position: relative; left: 35%;" />
+<input id="StanKonta" type="button" class="button" value="0" onclick="" style="float: left; position: relative; left: 35%;" />
 </div>
 <div>
 
@@ -219,6 +220,7 @@ var UserName = parent.UserName;
 //UserName = "momo";
 
 srodki = 0;
+wylosowana = 0;
 
 rezultat = 0; //Wynik krecenia
 wybor = []; //Na co stawia gracz
@@ -229,11 +231,11 @@ test_mode = false;
 
 reset = true;
 
-function pobierzDane () {
+function pobierzDane () {	
 		$.ajax
 			(
 				{
-				url : 'http://kasynobackend-wygoda.rhcloud.com/backend/game',
+				url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
 				data : 
 				{
 					username: UserName,
@@ -241,23 +243,20 @@ function pobierzDane () {
 					function : "roulette",
 					betlist: wybor,
 					betamount: postawiona_kwota,
-					roulettespin: Math.floor(Math.random() * 37) // byc moze trzeba to brac z backend/check?
+					roulettespin: wylosowana
 				},
 				type : 'POST',
 				dataType : 'json',
 				success : function(data) 
 				{
 			
-					rezultat = data["result"];
-					console.log(rezultat);
+					rezultat = data["amount"];
+					console.log("Otrzymane dane:"+rezultat);
 					
 					
 					if (sprawdz_co_postawiono())
 					{
 
-						reset = 0 + "deg";
-						document.getElementById("kolo").style.webkitTransition = '-webkit-transform 0s ease-out';
-						document.getElementById("kolo").style.webkitTransform = 'rotate('+reset+')'; //Rotacja obrazka kola
 	
 						console.log("Tablica wybranych pol:"+wybor);
 						rotuj();
@@ -275,7 +274,7 @@ function pobierzDane () {
 				{
 					alert('Wystąpił błąd.:(. Testowo polece dalej z wynikiem = 15');
 					test_mode = true;
-					rezultat = 15;
+					rezultat = -15;
 					console.log(rezultat);
 					
 					if (sprawdz_co_postawiono())
@@ -301,7 +300,35 @@ function pobierzDane () {
 				}
 			);
 }
-function stankonta(){
+function pobierzlosowa() //Pobiera losowana liczbe
+{
+$.ajax
+	(
+		{
+			url : 'http://kasynobackend-wygoda.rhcloud.com/backend/game',
+			data : 
+			{
+				username: UserName,
+				userPassword: UserPassword,
+				function : "roulette",
+				betlist: wybor,
+				betamount: postawiona_kwota,
+			},
+			type : 'POST',
+			dataType : 'json',
+			success : function(data) 
+			{
+			
+				wylosowana = data["result"];
+				console.log("Otrzymany los:"+wylosowana);
+					
+			}
+		}
+	);
+
+}
+
+function stankonta(){ //Aktualizuje stan konta
 $.ajax
 	(
 		{
@@ -325,9 +352,9 @@ $.ajax
 			},
 			error : function() 
 			{
-				alert('Wystąpił błąd.:(: Testowo przejscie z 1500 na koncie' );
-				test_mode = true;
-				srodki=1500;
+				//alert('Wystąpił błąd.:(: Testowo przejscie z 1500 na koncie' );
+				//test_mode = true;
+				//srodki=1500;
 				aktualizujstan();
 				
 			},
@@ -391,6 +418,20 @@ function rotuj(){
 
 function rotate(){
 	test_mode = false;
+	
+	reset = 0 + "deg";
+	document.getElementById("kolo").style.webkitTransition = '-webkit-transform 0s ease-out';
+	document.getElementById("kolo").style.webkitTransform = 'rotate('+reset+')';
+	
+	//Wprawia tymczasowa rotacje
+	document.getElementById("clickMe").style.color = "#000000";
+	document.getElementById("clickMe").value = "...";
+	document.getElementById("clickMe").style.background = "#000000";
+	reset = 45278 + "deg";
+	document.getElementById("kolo").style.webkitTransition = '-webkit-transform 10s ease-out';
+	document.getElementById("kolo").style.webkitTransform = 'rotate('+reset+')';
+	
+	
 	
 	pobierzDaneGracza();
 	
@@ -563,6 +604,16 @@ function sprawdz_co_postawiono(){
 
 function wynik(){ //Chyba nie potrzebne bo jest w api...
 
+	if (rezultat>0)
+	{
+		wygrana();
+	}
+	else
+	{
+		przegrana();
+	}
+
+	/*
 	if (rezultat==0)
 	{
 		przegrana();
@@ -664,6 +715,7 @@ function wynik(){ //Chyba nie potrzebne bo jest w api...
 	{
 		przegrana();
 	}
+	*/
 
 }
 
@@ -674,19 +726,31 @@ function wygrana(){
 	//Dodaj kwote do gracza
 	//srodki=srodki+postawiona_kwota*mnoznik;
 	
+	//stankonta();
+	
 	console.log("Twoje srodki to :"+srodki);
+	document.getElementById("clickMe").style.transition = "all 0s ease 0s";
+	document.getElementById("clickMe").style.color = "#000000";
 	document.getElementById("clickMe").value = "Wygrałeś";
+	document.getElementById("clickMe").style.transition = "all 2s ease 2s";
+	document.getElementById("clickMe").style.color = "#ffffff";
 	document.getElementById("clickMe").style.background = "#4cff4c";
+
 }
 function przegrana(){
 	console.log("Przegrałeś...");
 	//Jakies opracowanie dla przegranej
 	//może jakiś irytujący dźwięk
 	//Odejmij kwote od gracza
-	srodki=srodki-postawiona_kwota;
+	//srodki=srodki-postawiona_kwota;
+	//stankonta();
 	console.log("Twoje srodki to :"+srodki);
+	document.getElementById("clickMe").style.transition = "all 0s ease 0s";
+	document.getElementById("clickMe").style.color = "#000000";
 	document.getElementById("clickMe").value = "Przegrałeś";
-	document.getElementById("clickMe").style.background = "#004c00";
+	document.getElementById("clickMe").style.transition = "all 2s ease 2s";
+	document.getElementById("clickMe").style.color = "#ffffff";
+	document.getElementById("clickMe").style.background = "#a30f2d";
 }
 
 
