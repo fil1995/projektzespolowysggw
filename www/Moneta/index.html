@@ -27,7 +27,7 @@
 			var Moneta_val;
 			var plusBtn = document.getElementById("plus");
 			var minusBtn = document.getElementById("minus");
-			var stanKonta = document.querySelector("#stanKonta");
+			var stanKonta = document.getElementById("stanKonta");
 			var userData = [];
 			
 			function pobierzDaneUsera(){
@@ -166,9 +166,9 @@
 					//kod, który ma zostać wykonany jeśli żądanie się powiedzie;
 					// odpowiedź jest przekazywana do funkcji
 					success : function(data) {
-						userData = data.USER.split(", ");
-						stanKonta.innerHTML=userData[2];
-						//console.log(userData);
+						userData = data["user"].split(",");
+						document.getElementById("stanKonta").innerHTML=userData[2];
+						console.log(userData);
 					},
 				
 					// kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
