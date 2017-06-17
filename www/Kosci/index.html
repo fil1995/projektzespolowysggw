@@ -21,10 +21,8 @@
 			Zmienne odpowiedzialne, za logowanie, dla Michała:
 		*/
 		// zebranie danych ze strony głównej
-		var USER = parent.UserName;
-		var PASS = parent.UserPassword;
-		
-		
+			var USER = parent.UserName;
+			var PASS = parent.UserPassword;
 			var k1 =1;
 			var k2 =1;
 			var kosc1 = document.getElementById("kosc1");
@@ -34,6 +32,12 @@
 			var Kosc2_val = ktoryZaznaczony2();	
 			var plusBtn = document.getElementById("plus");
 			var minusBtn = document.getElementById("minus");
+			var stanKonta = document.getElementById("stanKonta");
+			var userData = [];
+		
+			function pobierzDaneUsera(){
+				getUser(USER,PASS);
+			}
 		
 			function ktoryZaznaczony1(){
 				if(document.getElementById("wartoscKosc11").checked == true){
@@ -186,14 +190,58 @@
 					console.log("Stan konta zmieniony");
 					console.log(data);
 					alert("Stan konta zmienił się o: "+data["amount"]);
-					
+					getUser(USER,PASS);					
 				}
+				});
+			}
+			
+			function getUser (USER, PASS) {
+				$.ajax({
+					// adres URL żądania
+					url : 'http://kasynobackend-wygoda.rhcloud.com/backend/user',
+				
+					// dane, które mają zostać wysłane
+					// (zostaną przekształcone na łańcuch zapytania)
+					data : {
+						//password : "OstryZBaraninaNaC13nk1m!",
+						function : "getUser",
+						username: USER,
+						userPassword: PASS
+					},
+				
+					// określamy typ żądania — POST lub GET
+					type : 'POST',
+				
+					// typ danych, jaki chcemy otrzymać
+					dataType : 'json',
+				
+					//kod, który ma zostać wykonany jeśli żądanie się powiedzie;
+					// odpowiedź jest przekazywana do funkcji
+					success : function(data) {
+						userData = data["user"].split(",");
+						document.getElementById("stanKonta").innerHTML=userData[2];
+						console.log(userData);
+					},
+				
+					// kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
+					// nieprzetworzone żądanie oraz kody stanu są
+					// przekazywane do funkcji
+					error : function(xhr, status) {
+						"use strict";
+						alert('Przepraszamy, wystąpił problem!');
+					},
+				
+					// kod, który ma zostać wykonany bez względu na to, czy żądanie zostało zakończone powodzeniem, czy nie
+					complete : function(xhr, status) {
+						"use strict";
+						//alert('Żądanie wykonane!');
+					}
 				});
 			}
 			
 		</script>
 	</head>
-	<body background="tloKosci.tiff">
+	<body onload="pobierzDaneUsera();" background="tloKosci.tiff">
 		<div class="container">
 			<div id="kosc1" class="cube">
 				<div class="front"></div>
@@ -250,6 +298,10 @@
 					<button id="minus" type="button" onclick="zmniejszStawke()" disabled>-</button>
 					<div id="stawka" style="color:#f5f5f5;">1</div>
 					<button id="plus" type="button" onclick="zwiekszStawke()">+</button>
+				</div>
+				<div id="pasek">
+						<div id="pasekTekst" style="color:#f5f5f5;"> STAN TWOJEGO KONTA: </div> 
+						<div id="stanKonta" style="color:#f5f5f5;">0.00</div>
 				</div>
 				</form>
 			</table>
