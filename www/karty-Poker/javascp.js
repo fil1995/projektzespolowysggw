@@ -27,10 +27,8 @@ var bet;
 var Scards="";
 
 // zebranie danych ze strony głównej
-//var user = parent.UserName;
-//var userPass = parent.UserPassword;
-var user = "test23";
-var userPass = "testpass";
+var user = parent.UserName;
+var userPass = parent.UserPassword;
 
 console.log(user);
 console.log(userPass);
