@@ -110,7 +110,7 @@
 				if( Kosc1_val == undefined || Kosc2_val == undefined){
 					alert('Wybierz liczbę oczek');
 				}else{
-					pobierzDane ();
+					pobierzDane (k1,k2);
 					
 				}
 			}
@@ -136,6 +136,7 @@
 //////////////// DODANE BY Filip Matysiak	
 			
 			function pobierzDane (Kosc1,Kosc2) {
+				
 				$.ajax({
 				url : 'http://kasynobackend-wygoda.rhcloud.com/backend/game',
 				data : {
@@ -173,15 +174,20 @@
 			}
 
 			function AktualizujStan (Kosc1,Kosc2) {
+				console.log("Zakład:");
+				console.log(Kosc1_val + Kosc2_val);
+				console.log("wylosowane:");
+				console.log(Kosc1+Kosc2);
+				console.log(Kosc1 + '' + Kosc2);
 				$.ajax({
 				url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
 				data : {
 					username: USER,
 					userPassword: PASS,
 					function : "dice",
-					diceroll: Kosc1 + Kosc2,
+					diceroll: Kosc1 + '' + Kosc2,
 					betamount: stawka.innerHTML,
-					dicebet: Kosc1_val + Kosc2_val // zakład
+					dicebet: Kosc1_val + '' + Kosc2_val // zakład
 				},
 				type : 'POST',
 				dataType : 'json',
@@ -189,7 +195,7 @@
 			
 					console.log("Stan konta zmieniony");
 					console.log(data);
-					alert("Stan konta zmienił się o: "+data["amount"]);
+//					alert("Stan konta zmienił się o: "+data["amount"]);
 					getUser(USER,PASS);					
 				}
 				});

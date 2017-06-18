@@ -52,7 +52,7 @@ function zakryj() {
 
 function createStyle(idOrg, id) {
     "use strict";
-    styleElem.innerHTML += "#" + id + "::before{\n background: url(images/" + idOrg + ".png);\n background-size: contain;\n background-repeat: no-repeat;\n }";
+    styleElem.innerHTML += "#" + id + "::before{\n background: url(https://freeshell.de/~fil1995/karty-poker-images/" + idOrg + ".png);\n background-size: contain;\n background-repeat: no-repeat;\n }";
 }
 
 function przegrales() {
@@ -69,9 +69,6 @@ function wygrales(kwota) {
     "use strict";
     wynikSpan.innerHTML = "Wygrałeś " + kwota + "$";
     wygrana.style.display = "block";
-    plusBtn.disabled = true;
-    stawka.disabled = true;
-    minusBtn.disabled = true;
     hitBtn.disabled = true;
     dDBtn.disabled = true;
     standBtn.disabled = true;
@@ -110,7 +107,7 @@ function stand() {
         sbank += bank[i];
         if (i < bank.length - 1) { sbank += ", "; }
     }
-    for(i = 0; i < playerCards2.length ; i = i + 1){
+    for(i = 2; i < playerCards2.length ; i = i + 1){
         splayer += playerCards2[i];
         if (i < playerCards2.length - 1) { splayer += ", "; }
     }
@@ -148,7 +145,7 @@ function hit() {
             sbank += bank[i];
             if (i < bank.length - 1) { sbank += ", "; }
         }
-        for(i = 0; i < playerCards2.length ; i = i + 1){
+        for(i = 2; i < playerCards2.length ; i = i + 1){
             splayer += playerCards2[i];
             if (i < playerCards2.length - 1) { splayer += ", "; }
         }
@@ -216,9 +213,6 @@ gramBtn.addEventListener("click", function () {
     $('div.flip-card').remove();
     zakryj();
     pobierz();
-    hitBtn.disabled = false;
-    dDBtn.disabled = false;
-    standBtn.disabled = false;
 }, false);
 
 
