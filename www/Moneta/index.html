@@ -52,18 +52,23 @@
 			
 			function resetowanie(){
 				var resetMonety = '<div id="moneta" class="coin"><div class="front"></div><div class="back"></div></div>';
+				
 				setTimeout(function(){
 					if(moneta1 == Moneta_val){
-						alert('Wygrałeś');
+						document.getElementById("status").innerHTML = "Wygrałeś";
 					}else{
-						alert('Przegrałeś');
+						document.getElementById("status").innerHTML = "Przegrałeś";
 					}
+				},5100);
+				
+				setTimeout(function(){
 					document.getElementById("rzucButton").disabled = false;
 					$('.container').fadeOut('slow',function(){
 						$(this).html(resetMonety)
+						document.getElementById("status").innerHTML = " "
 					}).fadeIn('slow');
 					AktualizujStan();
-				},5100);
+				},7000);
 			}
 			
 			function rzucMoneta(){
@@ -113,10 +118,7 @@
 						console.log("wypadło: "+moneta1);
 						console.log(data);
 						//var status = document.getElementById("status");
-						jakObrocicMonete(moneta1);
-						
-						
-						
+						jakObrocicMonete(moneta1);					
 						resetowanie();
 					}
 				});
@@ -221,5 +223,6 @@
             <div id="pasekTekst"> STAN TWOJEGO KONTA: </div> 
             <div id="stanKonta">0.00</div>
         </div>
+		<h2 id="status" style="position:absolute; margin-top:85px"> </h2>
 	</body>
 </html>
