@@ -125,7 +125,6 @@ function hit() {
     playerCards2[1] = playerCards2[1] + (playerCards1[wsk] % 13);
     playerCards2[wsk + 2] = playerCards1[wsk];
     repeatTable[playerCards1[wsk]] = repeatTable[playerCards1[wsk]] + 1;
-    console.log(repeatTable[playerCards1[wsk]]);
     karta.id = ourTable[playerCards2[wsk + 2] - 1];
     if (repeatTable[playerCards1[wsk]] > 1) {
         karta.id = karta.id + repeatTable[playerCards1[wsk]];
@@ -243,8 +242,6 @@ function pobierz() {
         //kod, który ma zostać wykonany jeśli żądanie się powiedzie;
         // odpowiedź jest przekazywana do funkcji
         success : function (data) {
-            jQuery.each(data, function(i, ob) {
-                console.log(i, ob); });
             bank = data.bank;
             playerCards1 = data.player;
             getUser(user, userpass);
@@ -256,7 +253,7 @@ function pobierz() {
         // nieprzetworzone żądanie oraz kody stanu są
         // przekazywane do funkcji
         error : function (xhr, status) {
-       //alert('Przepraszamy, wystąpił problem!');
+            alert('Przepraszamy, wystąpił problem! Prosimy odśwież stronę.');
         },
   
         // kod, który ma zostać wykonany bez względu na to, czy żądanie zostało zakończone powodzeniem, czy nie
@@ -387,7 +384,6 @@ function getUser (user, userPass) {
     success : function(data) {
         userData = data.user.split(", ");
 	    stanKonta.innerHTML=Number(userData[2]);
-		//console.log(userData);
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
@@ -446,7 +442,6 @@ function START() {
             }
             karta.className = "flip-card";
             div.appendChild(karta);
-            console.log(playerCards2[1]);
             if (i == 0) { pcarda = karta.id; } else { pcardb = karta.id; }
         }
     setTimeout(function () {
