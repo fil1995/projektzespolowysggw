@@ -1,5 +1,5 @@
 html {
-    /*background: linear-gradient(black, transparent), url(https://freeshell.de/~fil1995/karty-poker-images/bg.jpg) no-repeat center center fixed;*/
+    /*background: linear-gradient(black, transparent), url(images/bg.jpg) no-repeat center center fixed;*/
     background-color: rgba(0, 0, 0, 0);
     min-height: 100%;
 }
@@ -8,6 +8,13 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+#top {
+   /* width: 1130px; */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
 #pasek{
     padding: 10px;
     background-color: black;
@@ -15,15 +22,18 @@ html, body {
 	font-family:Arial;
 	font-size:20px;
 	font-weight:bold;
-    height: 30px;
+    height: 70px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 
 #pasekTekst{
-    width:250px;
+    max-width:250px;
     float: left;
     margin-top: 4px;
+    margin-right: 5px;
+    clear:left;
+    margin-bottom: 10px;
 }
 
 #stanKonta{
@@ -37,124 +47,98 @@ html, body {
     text-align: right;
 }
 
-#top {
-    //width: 1130px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
+#zaklad{
+    float: left;
+    padding: 3px;
+    border-radius:5px;
+    background-color: whitesmoke;
+    color: black;
+    min-width: 150px;
+    max-height: 500px;
+    text-align: right;
 }
 
-#TRESC {
+
+.desk {
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
-    width: 988px;
-    height: 335.5px;
     border-radius: 10px;
 	background-color: rgba(59, 108, 52, 0.9);
+    min-height: 194px;
+	width: 1090px;
 }   
 
-.blokuj{
-    -moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
-	background:-moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
-	background:-webkit-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
-	background:-o-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
-	background:-ms-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
-	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#768d87', endColorstr='#6c7c7c',GradientType=0);
-	background-color:#768d87;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	border:1px solid #566963;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:10px 0px;
+#interface {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    background: rgba(59, 108, 52, 0.9);
+    border-radius: 20px;
+    width: 660px;
+    height: auto;
+    
+}
+
+div #wygrana {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    z-index: 2;
+    top: 150px;
+    height: 245px;
+}
+
+div #wynik{
+    background: rgba(21, 54, 129, 0.93);
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 50px;
+    width: 300px;
+    height: 100px;
+    padding: 30px;
+    color:#ededed;
     text-align: center;
-	text-decoration:none;
-	text-shadow:0px -1px 0px #2b665e;
-    margin: 5px;
-	width: 184px;
-}
-.blokuj:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
-	background:-moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:-ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
-	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
-	background-color:#6c7c7c;
-}
-.blokuj:active {
-	position:relative;
-	top:1px;
-}
-
-.blokuj:disabled{
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #768d87));
-	background:-moz-linear-gradient(top, #000000 5%, #768d87 100%);
-	background:-webkit-linear-gradient(top, #000000 5%, #768d87 100%);
-	background:-o-linear-gradient(top, #000000 5%, #768d87 100%);
-	background:-ms-linear-gradient(top, #000000 5%, #768d87 100%);
-	background:linear-gradient(to bottom, #000000 5%, #768d87 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#768d87',GradientType=0);
-	background-color:#000000;
-}
-
-.odblokuj {
-	-moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
-	box-shadow:inset 0px 1px 0px 0px #cf866c;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
-	background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
-	background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
-	background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
-	background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
-	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
-	background-color:#d0451b;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	border:1px solid #566963;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
+    font-family:Arial;
+	font-size:20px;
 	font-weight:bold;
-	padding:10px 0px;
+    display: none;
+}
+
+div #poczatek{
+    background: rgba(21, 54, 129, 0.93);
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 50px;
+    min-height: 100px;
+    max-height: 200px;
+    padding: 30px;
+    color:#ededed;
     text-align: center;
-	text-decoration:none;
-	text-shadow:0px -1px 0px #2b665e;
-    margin: 5px;
-	width: 184px;
-}
-.odblokuj:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
-	background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
-	background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
-	background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
-	background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
-	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bc3315', endColorstr='#d0451b',GradientType=0);
-	background-color:#bc3315;
-}
-.odblokuj:active {
-	position:relative;
-	top:1px;
+    font-family:Arial;
+	font-size:33px;
+	font-weight:bold;
+    width: 465px;
+    display: none;
 }
 
+#betamount{
+    padding: 15px;
+    border-radius:5px;
+    background-color: whitesmoke;
+    color: black;
+    width: 350px;
+    text-align: right;
+    font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+    margin-top: 20px;
+}
 
+/*PRZYCISKI*/
 
 .BTN {
 	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
@@ -192,20 +176,6 @@ html, body {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#768d87',GradientType=0);
 	background-color:#000000;
 }
-
-
-#wypisz {
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 15px;
-    background: rgba(59, 108, 52, 0.9);
-    border-radius: 20px;
-    width: 675px;
-    height: auto;
-    
-}
-
 #plus{
     padding: 15px;
     margin: 5px;
@@ -225,40 +195,12 @@ html, body {
 	font-family:Arial;
 	font-size:20px;
 	font-weight:bold;
+    width: 40px;
 }
 
-#przycisk{
-    margin-left: 35px;
-    margin-right: 35px;
-}
-
-div #wygrana {
-    width: 988px;
-    margin-left: auto;
-    margin-right: auto;
-    position: absolute;
-    z-index: 2;
-    top: 150px;
-    height: 245px;
-   /* border: 1px solid #004;*/
-   /* background: linear-gradient(black, transparent), url(https://freeshell.de/~fil1995/karty-poker-imageswygrana.jpg) no-repeat;*/
-    border-radius: 20px;
-    display: none;
-}
-
-div #wynik{
-    background: rgba(21, 54, 129, 0.93);
-    border-radius: 20px;
-    margin: auto;
-    margin-top: 50px;
-    width: 380px;
-    height: 100px;
-    padding: 30px;
-    color:#ededed;
-    text-align: center;
-    font-family:Arial;
-	font-size:20px;
-	font-weight:bold;
+#DDBTN{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 #gramBTN{
@@ -266,13 +208,19 @@ div #wynik{
 }
 
 
+#startBTN{
+    margin-top: 25px;
+}
+
+
+
 
 /*KARTY*/
 
 .flip-card {
   margin: 5px;  
-  width: 187.5px;
-  height: 270px;
+  width: 125px;
+  height: 180px;
   border-radius: 0px;
   position: relative;
   perspective: 400px;
@@ -290,6 +238,22 @@ div #wynik{
   box-sizing: border-box;
   transition: 0.6s transform linear;
   backface-visibility: hidden;
+}
+
+.flip-card::after {
+  /*background-image: 
+    repeating-linear-gradient(
+      -45deg,
+      #7b9a79,
+      #7b9a79 25px,
+      #000000 25px,
+      #000000 30px
+    );
+    */
+    background: url(images/bs3.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    
 }
 
 .flip-card::after {

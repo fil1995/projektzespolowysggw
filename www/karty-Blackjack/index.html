@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>BLACKJACK</title>
+        <link rel="stylesheet" href="cssBlackjack.css">
+        <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+        
+    </head>
+    <body onload="pobierz();">
+        <div id="pasek">
+            <div id="pasekTekst"> STAN TWOJEGO KONTA: </div> 
+            <div id="stanKonta">0</div>
+            <div style="float: none"></div>
+            <div id="pasekTekst"> TWÓJ ZAKŁAD: </div> 
+            <div id="zaklad">0</div>
+        </div>
+        <div id="top">
+            <div id="TRESC">
+                <div id="bank" class="desk"></div>
+                <div id="player" class="desk"></div>
+                <div id="wygrana">
+                    <div id="wynik">
+                        <span id="wynikSpan">Sorry :)</span>
+                        <button id="gramBTN" class="BTN" type="button">GRAM DALEJ</button>
+                    </div>
+                    <div id="poczatek">
+                        <div id="poczatekTekst">WPISZ STAWKĘ</div>
+                        <div>
+                            <input type="number" min="1" id="betamount">
+                        </div>
+                        <button id="startBTN" class="BTN" type="button">GRAJMY!</button>
+                    </div>
+                </div>
+            </div>
+            <div id="interface">
+                <button id="hitBTN" class="BTN" type="button" disabled>HIT</button>
+                <button id="DDBTN" class="BTN" type="button" disabled>DOUBLE DOWN</button>
+                <button id="standBTN" class="BTN" type="button" disabled>STAND</button>
+            </div>
+        </div>
+        <script src="javascp.js"></script>
+    </body>    
+</html>
