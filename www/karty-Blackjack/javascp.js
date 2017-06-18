@@ -107,7 +107,7 @@ function stand() {
         sbank += bank[i];
         if (i < bank.length - 1) { sbank += ", "; }
     }
-    for(i = 0; i < playerCards2.length ; i = i + 1){
+    for(i = 2; i < playerCards2.length ; i = i + 1){
         splayer += playerCards2[i];
         if (i < playerCards2.length - 1) { splayer += ", "; }
     }
@@ -145,7 +145,7 @@ function hit() {
             sbank += bank[i];
             if (i < bank.length - 1) { sbank += ", "; }
         }
-        for(i = 0; i < playerCards2.length ; i = i + 1){
+        for(i = 2; i < playerCards2.length ; i = i + 1){
             splayer += playerCards2[i];
             if (i < playerCards2.length - 1) { splayer += ", "; }
         }
