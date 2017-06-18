@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@{
     Layout = "~/_SiteLayout.cshtml";
     Page.Title = "Poker";
@@ -106,4 +107,114 @@
                                     </div>
                                 </div>
                             }
+=======
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Poker";
+    string title = "";
+
+    if (Session["username"] == null)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12 text-center">
+
+
+                        @{title = "Zaloguj się lub zarejestruj żeby zagrać...";
+                            <hgroup class="title">
+                                <h1>@title</h1>
+                            </hgroup>
+                            Session["gra"] = "poker";
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+                            }
+                            else
+                            {
+							<script>
+								var UserPassword = '@Session["userPassword"]';
+								var UserName = '@Session["username"]';
+							</script>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="box">
+                                            <div class="col-lg-12 text-center">
+                                                <iframe class="iframe" onload="resizeIframe(this)" src="~/karty-Poker/"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="box">
+                                            <div class="col-lg-12 text-center">
+                                                <center><h2>POKER</h2></center>
+                                                Masz szczęście w kartach? Sprawdź to!<br>
+                                                Wybierz wartość zakładu i naciśnij „Rozdaj”. Teraz zdecyduj, które karty chcesz zamienić,
+                                                a które zachować poprzez przyciski na górze. Następnie naciśnij „Zamień” i sprawdź, czy wygrałeś!
+                                                Ewentualna wygrana to stawka pomnożona przez mnożnik danego układu. <br>
+                                                Wykaz układów wraz z mnożnikiem: <br>
+
+
+
+                                                <table align="center" border="5">
+                                                    <tr>
+                                                        <td>Poker Królewski</td>
+                                                        <td>–A,K,D,J,10 w kolorze </td>
+                                                        <td>– x250</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Poker</td>
+                                                        <td>– Strit w kolorze </td>
+                                                        <td>– x50</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kareta</td>
+                                                        <td>– 4 takie same karty+dowolna </td>
+                                                        <td>– x25</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ful </td>
+                                                        <td>– Para+Trójka </td>
+                                                        <td>– x9</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kolor</td>
+                                                        <td>– 5 kart w kolorze </td>
+                                                        <td>– x6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Strit</td>
+                                                        <td>– 5 kolejnych kart </td>
+                                                        <td>– x4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Trójka</td>
+                                                        <td>– 3 jednakowe karty+2 dowolne </td>
+                                                        <td>– x3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dwie Pary </td>
+                                                        <td>– 2 jednakowe+2 jednakowe </td>
+                                                        <td>– x2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Para Walety lub wyższe </td>
+                                                        <td>– 2 jednakowe >=J + 3 dowolne </td>
+                                                        <td>–x1</td>
+                                                    </tr>
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+>>>>>>> 94061150dff5192db42ec3aeb7204a6438c8f0e2
 }

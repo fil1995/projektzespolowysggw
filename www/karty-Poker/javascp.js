@@ -136,7 +136,7 @@ minusBtn.addEventListener("click", function () {
 
 gramBtn.addEventListener("click", function () {
     "use strict";
-    addBtn.disabled = false;
+    addBtn.disabled = true;
     if (Number(stawka.innerHTML) < 10) {plusBtn.disabled = false; }
     if (Number(stawka.innerHTML) > 1) {minusBtn.disabled = false; }
     cards = [];
@@ -174,7 +174,6 @@ function pobierz_grafike () {
     }
 	pobierz();
     getUser(user, userPass);
-    //setTimeout(function () { }, 1000);
 }
 
 
@@ -289,6 +288,7 @@ function pobierz () {
     // odpowiedź jest przekazywana do funkcji
     success : function(data) {
         cards = data.cards;
+        addBtn.disabled = false;
     },
   
     // kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;

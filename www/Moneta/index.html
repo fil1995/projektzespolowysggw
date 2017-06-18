@@ -27,6 +27,12 @@
 			var Moneta_val;
 			var plusBtn = document.getElementById("plus");
 			var minusBtn = document.getElementById("minus");
+			var stanKonta = document.getElementById("stanKonta");
+			var userData = [];
+			
+			function pobierzDaneUsera(){
+				getUser(USER,PASS);
+			}
 		
 			function ktoryZaznaczony(){
 				if(document.getElementById("orzel").checked == true){
@@ -46,20 +52,27 @@
 			
 			function resetowanie(){
 				var resetMonety = '<div id="moneta" class="coin"><div class="front"></div><div class="back"></div></div>';
+				
 				setTimeout(function(){
 					if(moneta1 == Moneta_val){
-						alert('Wygrałeś');
+						document.getElementById("status").innerHTML = "Wygrałeś";
 					}else{
-						alert('Przegrałeś');
+						document.getElementById("status").innerHTML = "Przegrałeś";
 					}
+				},5100);
+				
+				setTimeout(function(){
+					document.getElementById("rzucButton").disabled = false;
 					$('.container').fadeOut('slow',function(){
 						$(this).html(resetMonety)
+						document.getElementById("status").innerHTML = " "
 					}).fadeIn('slow');
-				},5100);
+					AktualizujStan();
+				},7000);
 			}
 			
 			function rzucMoneta(){
-				
+				document.getElementById("rzucButton").disabled = true;
 				Moneta_val = ktoryZaznaczony();			
 				
 				if(Moneta_val == undefined){
@@ -105,14 +118,81 @@
 						console.log("wypadło: "+moneta1);
 						console.log(data);
 						//var status = document.getElementById("status");
-						jakObrocicMonete(moneta1);
+						jakObrocicMonete(moneta1);					
 						resetowanie();
 					}
 				});
 			}	
-		</script>
+
+			function AktualizujStan () {
+				$.ajax({
+					url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
+					data : {
+						username: USER,
+						userPassword: PASS,
+						function : "cointoss",
+						toss: moneta1,
+						betamount: stawka.innerHTML,
+						bet: Moneta_val // zakład
+					},
+					type : 'POST',
+					dataType : 'json',
+					success : function(data) {
+						console.log("Stan konta zmieniony");
+						console.log(data);
+						alert("Stan konta zmienił się o: "+data["amount"]);
+						getUser(USER,PASS);
+					}
+				});
+			}
+			function getUser (USER, PASS) {
+				$.ajax({
+					// adres URL żądania
+					url : 'http://kasynobackend-wygoda.rhcloud.com/backend/user',
+				
+					// dane, które mają zostać wysłane
+					// (zostaną przekształcone na łańcuch zapytania)
+					data : {
+						//password : "OstryZBaraninaNaC13nk1m!",
+						function : "getUser",
+						username: USER,
+						userPassword: PASS
+					},
+				
+					// określamy typ żądania — POST lub GET
+					type : 'POST',
+				
+					// typ danych, jaki chcemy otrzymać
+					dataType : 'json',
+				
+					//kod, który ma zostać wykonany jeśli żądanie się powiedzie;
+					// odpowiedź jest przekazywana do funkcji
+					success : function(data) {
+						userData = data["user"].split(",");
+						document.getElementById("stanKonta").innerHTML=userData[2];
+						console.log(userData);
+					},
+				
+					// kod, który ma zostać wykonany jeśli żądanie się nie powiedzie;
+					// nieprzetworzone żądanie oraz kody stanu są
+					// przekazywane do funkcji
+					error : function(xhr, status) {
+						"use strict";
+						alert('Przepraszamy, wystąpił problem!');
+					},
+				
+					// kod, który ma zostać wykonany bez względu na to, czy żądanie zostało zakończone powodzeniem, czy nie
+					complete : function(xhr, status) {
+						"use strict";
+						//alert('Żądanie wykonane!');
+					}
+				});
+			}
+
+
+			</script>
 	</head>
-	<body background="tloMoneta.jpg">
+	<body onload="pobierzDaneUsera();" background="tloMoneta.jpg">
 		<div class="container">
 			<div id="moneta" class="coin">
 				<div class="front"></div>
@@ -130,7 +210,7 @@
 						<td>Reszka</td>
 						<td><input type="radio" name="wartoscMoneta" value="heads" id="reszka"></td>
 					</tr>
-					<input type="button" onclick="rzucMoneta()" value="Rzuć monetą"/>
+					<button id="rzucButton" type="button" onclick="rzucMoneta()">Rzuć monetą</button>
 				<div style="display: inline-flex; margin-left:5px;">
 					<button id="minus" type="button" onclick="zmniejszStawke()" disabled>-</button>
 					<div id="stawka" style="color:#000000;">1</div>
@@ -138,9 +218,11 @@
 				</div>
 				</form>
 			</table>
-			
-			<h2 id="status" style="color:#000000;"> </h2>
-			
 		</div>
+		<div id="pasek">
+            <div id="pasekTekst"> STAN TWOJEGO KONTA: </div> 
+            <div id="stanKonta">0.00</div>
+        </div>
+		<h2 id="status" style="position:absolute; margin-top:85px"> </h2>
 	</body>
 </html>
