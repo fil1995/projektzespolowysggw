@@ -52,7 +52,7 @@ function zakryj() {
 
 function createStyle(idOrg, id) {
     "use strict";
-    styleElem.innerHTML += "#" + id + "::before{\n background: url(images/" + idOrg + ".png);\n background-size: contain;\n background-repeat: no-repeat;\n }";
+    styleElem.innerHTML += "#" + id + "::before{\n background: url(https://freeshell.de/~fil1995/karty-poker-images/" + idOrg + ".png);\n background-size: contain;\n background-repeat: no-repeat;\n }";
 }
 
 function przegrales() {
