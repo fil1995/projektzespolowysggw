@@ -28,8 +28,11 @@ var wsk = 0;
 var pcarda;
 var pcardb;
 var bcard;
-var user = "test23";
-var userpass = "testpass";
+
+// zebranie danych ze strony głównej
+var user = parent.UserName;
+var userpass = parent.UserPassword;
+
 var splayer = "";
 var sbank = "";
 var amount = 0;
