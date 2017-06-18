@@ -69,9 +69,6 @@ function wygrales(kwota) {
     "use strict";
     wynikSpan.innerHTML = "Wygrałeś " + kwota + "$";
     wygrana.style.display = "block";
-    plusBtn.disabled = true;
-    stawka.disabled = true;
-    minusBtn.disabled = true;
     hitBtn.disabled = true;
     dDBtn.disabled = true;
     standBtn.disabled = true;
