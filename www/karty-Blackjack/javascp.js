@@ -122,7 +122,19 @@ function hit() {
     karta = document.createElement("div");
     wsk = playerCards2[0];
     playerCards2[0] = playerCards2[0] + 1;
-    playerCards2[1] = playerCards2[1] + (playerCards1[wsk] % 13);
+    if (playerCards1[wsk] % 13 == 1){
+        if (playerCards2[1] + 11 < 22) {
+            playerCards2[1] = playerCards2[1] + 11;
+        }else{
+            playerCards2[1] = playerCards2[1] + 1;
+        }
+    }
+    if (playerCards1[wsk] % 13 > 1 && playerCards1[wsk] % 13 < 11){
+        playerCards2[1] = playerCards2[1] + (playerCards1[wsk] % 13);
+    }
+    if (playerCards1[wsk] > 10){
+        playerCards2[1] = playerCards2[1] + 10;
+    }
     playerCards2[wsk + 2] = playerCards1[wsk];
     repeatTable[playerCards1[wsk]] = repeatTable[playerCards1[wsk]] + 1;
     karta.id = ourTable[playerCards2[wsk + 2] - 1];
@@ -427,9 +439,22 @@ function START() {
         }
         div = document.querySelector("#player");
         for (i = 0; i < 2; i = i + 1) {
+            wsk = playerCards2[0];
             karta = document.createElement("div");
             playerCards2[0] = playerCards2[0] + 1;
-            playerCards2[1] = playerCards2[1] + (playerCards1[i] % 13);
+            if (playerCards1[wsk] % 13 == 1){
+                if (playerCards2[1] + 11 < 22) {
+                    playerCards2[1] = playerCards2[1] + 11;
+                }else{
+                    playerCards2[1] = playerCards2[1] + 1;
+                }
+            }
+            if (playerCards1[wsk] % 13 > 1 && playerCards1[wsk] % 13 < 11){
+                playerCards2[1] = playerCards2[1] + (playerCards1[wsk] % 13);
+            }
+            if (playerCards1[wsk] > 10){
+                playerCards2[1] = playerCards2[1] + 10;
+            }
             playerCards2[i + 2] = playerCards1[i];
             repeatTable[playerCards1[i]] = repeatTable[playerCards1[i]] + 1;
             karta.id = ourTable[playerCards2[i + 2] - 1];
