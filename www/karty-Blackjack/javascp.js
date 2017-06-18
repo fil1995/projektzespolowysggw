@@ -213,9 +213,6 @@ gramBtn.addEventListener("click", function () {
     $('div.flip-card').remove();
     zakryj();
     pobierz();
-    hitBtn.disabled = false;
-    dDBtn.disabled = false;
-    standBtn.disabled = false;
 }, false);
 
 
