@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Jednoręki bandyta";
+    string title = "";
+
+    @*if (Session["username"] == null)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12 text-center">
+
+
+                        @{title = "Zaloguj się lub zarejestruj żeby zagrać...";
+                            <hgroup class="title">
+                                <h1>@title</h1>
+                            </hgroup>
+                            Session["gra"] = "blackjack";
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+                            }
+                            else
+                            {
+                                <script>
+								var UserPassword = '@Session["userPassword"]';
+								var UserName = '@Session["username"]';
+                                </script>*@
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="box">
+                                            <div class="col-lg-12 text-center">
+                                                <h1>Gra dostępna dla użytkowników aplikacji mobilnej.</h1> <br />
+                                                <h3>link do pobrania na Android: <a href="https://github.com/1dawidk/Kasyno/raw/master/app-release.apk" style="color: red; text-decoration: none;">Kasyno.apk</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="box">
+                                            <div class="col-lg-12 text-center">
+                                                <center><h2>JEDNORĘKI BANDYTA</h2></center>
+                                                Maszyna hazardowa dobierająca losowe konfiguracje różnych symboli. <br />
+                                                Wygrana następuje w momencie ułożenia się w jednym rzędzie identycznych znaków. 
+                                                Gra się na określone stawki, które przeliczane są na pieniądze. 
+                                                Im wyższa stawka, tym większy mnożnik lub więcej punktowanych linii.
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+}
