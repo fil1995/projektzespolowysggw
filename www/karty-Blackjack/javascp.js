@@ -162,6 +162,9 @@ function hit() {
             if (i < playerCards2.length - 1) { splayer += ", "; }
         }
         przegrana(zaklad, splayer, sbank, user, userpass); 
+    }else{
+	    wygrales(wynik);
+	    przegrana(zaklad, splayer, sbank, user, userpass);
     }
 }
 
