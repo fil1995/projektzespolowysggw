@@ -103,15 +103,18 @@
 			
 			function rzucKoscmi(){
 				
-
-				Kosc1_val = ktoryZaznaczony1();
-				Kosc2_val = ktoryZaznaczony2();
-				
-				if( Kosc1_val == undefined || Kosc2_val == undefined){
-					alert('Wybierz liczbę oczek');
+				if(document.getElementById("stanKonta").innerHTML <= 0.00){
+					alert('Musisz doładować konto');
 				}else{
-					pobierzDane (k1,k2);
+					Kosc1_val = ktoryZaznaczony1();
+					Kosc2_val = ktoryZaznaczony2();
+				
+					if( Kosc1_val == undefined || Kosc2_val == undefined){
+						alert('Wybierz liczbę oczek');
+					}else{
+						pobierzDane (k1,k2);
 					
+					}
 				}
 			}
 			
