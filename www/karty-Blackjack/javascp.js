@@ -147,6 +147,7 @@ function hit() {
     setTimeout(function () {
         odkryj(karta.id);
     }, 500);
+	console.log(playerCards2);
     if (playerCards2[0] >= 8) {
         hitBtn.disabled = true;
         dDBtn.disabled = true;
