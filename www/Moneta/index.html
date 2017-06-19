@@ -72,13 +72,17 @@
 			}
 			
 			function rzucMoneta(){
-				document.getElementById("rzucButton").disabled = true;
-				Moneta_val = ktoryZaznaczony();			
-				
-				if(Moneta_val == undefined){
-					alert('Wybierz orła lub reszkę');
+				if(document.getElementById("stanKonta").innerHTML <= 0.00){
+					alert('Musisz doładować konto');
 				}else{
-					pobierzDane ();				
+					document.getElementById("rzucButton").disabled = true;
+					Moneta_val = ktoryZaznaczony();			
+				
+					if(Moneta_val == undefined){
+					alert('Wybierz orła lub reszkę');
+					}else{
+						pobierzDane ();				
+					}
 				}
 			}
 			
