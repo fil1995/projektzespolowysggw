@@ -80,38 +80,38 @@ function stand() {
     hitBtn.disabled = true;
     dDBtn.disabled = true;
     standBtn.disabled = true;
-    setTimeout(function () { odkryj(bcard);}, 300);
+    setTimeout(function () { odkryj(bcard); }, 300);
     div = document.querySelector("#bank");
     for (i = bankCards[0] + 1; i < bank.length + 1; i = i + 1) {
-        (function(index) {
+        (function (index) {
             setTimeout(function () {
                 karta = document.createElement("div");
-                repeatTable[bank[index-1]] = repeatTable[bank[index-1]] + 1;
-                karta.id = ourTable[bank[index-1] - 1];
-                bankCards[index] = bank[index-1];
-                if (repeatTable[bank[index-1]] > 1) {
-                    karta.id = karta.id + repeatTable[bank[index-1]];
+                repeatTable[bank[index - 1]] = repeatTable[bank[index - 1]] + 1;
+                karta.id = ourTable[bank[index - 1] - 1];
+                bankCards[index] = bank[index - 1];
+                if (repeatTable[bank[index - 1]] > 1) {
+                    karta.id = karta.id + repeatTable[bank[index - 1]];
                     createStyle(ourTable[bankCards[index] - 1], karta.id);
                 }
                 karta.className = "flip-card";
                 div.appendChild(karta);
-                (function(karta) {
+                (function (karta) {
                     setTimeout(function () {
                         odkryj(karta.id);
                     }, 500);
-                })(karta);    
-            },(i-2) * 700);
+                })(karta);
+            }, (i - 2) * 700);
         })(i);
     }
-    for(i = 0; i < bank.length ; i = i + 1){
+    for (i = 0; i < bank.length; i = i + 1) {
         sbank += bank[i];
         if (i < bank.length - 1) { sbank += ", "; }
     }
-    for(i = 2; i < playerCards2.length ; i = i + 1){
+    for (i = 2; i < playerCards2.length; i = i + 1) {
         splayer += playerCards2[i];
         if (i < playerCards2.length - 1) { splayer += ", "; }
     }
-    sprawdz(zaklad, splayer, sbank, user, userpass); 
+    sprawdz(zaklad, splayer, sbank, user, userpass);
 }
 
 
@@ -132,7 +132,7 @@ function hit() {
     if (playerCards1[wsk] % 13 > 1 && playerCards1[wsk] % 13 < 11){
         playerCards2[1] = playerCards2[1] + (playerCards1[wsk] % 13);
     }
-    if (playerCards1[wsk] > 10){
+    if (playerCards1[wsk] > 10 || playerCards1[wsk] == 0){
         playerCards2[1] = playerCards2[1] + 10;
     }
     playerCards2[wsk + 2] = playerCards1[wsk];
@@ -193,7 +193,7 @@ startBtn.addEventListener("click", function () {
         stanKonta.innerHTML = Number(userData[2]) - zaklad;
         poczatektxt.style.color = 'white';
         poczatek.style.display = 'none';
-        poczatektxt.innerHTML = "WPISZ STAWKĘ"
+        poczatektxt.innerHTML = "WPISZ STAWKĘ";
         START();
         hitBtn.disabled = false;
         dDBtn.disabled = false;
@@ -209,9 +209,9 @@ startBtn.addEventListener("click", function () {
 gramBtn.addEventListener("click", function () {
     "use strict";
     i = 0;
-    bank = []
+    bank = [];
     bank = [0];
-    bankCards = []
+    bankCards = [];
     bankCards = [0]; 
     playerCards1 = []; //KARTY W PULI
     playerCards2 = [];
@@ -275,29 +275,29 @@ function pobierz() {
 function sprawdz (bet, SPlayerCards, SBankCards, user, userPass) {
     $.ajax({
     // adres URL żądania
-    url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
+        url : 'http://kasynobackend-wygoda.rhcloud.com/backend/check',
   
     // dane, które mają zostać wysłane
     // (zostaną przekształcone na łańcuch zapytania)
-    data : {
+        data : {
         //password : "OstryZBaraninaNaC13nk1m!",
-        function : "blackjack",
-        betamount: bet,
-        bank: SBankCards,
-        player: SPlayerCards,
-        username: user,
-        userPassword: userPass
-    },
+            function : "blackjack",
+            betamount: bet,
+            bank: SBankCards,
+            player: SPlayerCards,
+            username: user,
+            userPassword: userPass
+        },
   
     // określamy typ żądania — POST lub GET
-    type : 'POST',
+        type : 'POST',
   
     // typ danych, jaki chcemy otrzymać
-    dataType : 'json',
+        dataType : 'json',
   
     //kod, który ma zostać wykonany jeśli żądanie się powiedzie;
     // odpowiedź jest przekazywana do funkcji
-    success : function(data) {
+        success : function(data) {
         amount = data.amount;
         if (amount > 0) {
             wygrales(amount);
@@ -452,7 +452,7 @@ function START() {
             if (playerCards1[wsk] % 13 > 1 && playerCards1[wsk] % 13 < 11){
                 playerCards2[1] = playerCards2[1] + (playerCards1[wsk] % 13);
             }
-            if (playerCards1[wsk] > 10){
+            if (playerCards1[wsk] > 10 || playerCards1[wsk] == 0){
                 playerCards2[1] = playerCards2[1] + 10;
             }
             playerCards2[i + 2] = playerCards1[i];
